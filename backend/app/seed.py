@@ -8,105 +8,97 @@ from app.services.analyzer import ThreatAnalyzerService
 
 SAMPLE_INDIAN_POSTS = [
     # --- Banking & Financial Scams ---
-    {"platform": "X", "region": "Maharashtra", "topic": "#BankingScam", "username": "@mumbai_citizen_ravi", "text": "WARNING! Just received an SMS saying SBI Yono account will be blocked tonight if PAN KYC not updated immediately on link! Total scam!"},
-    {"platform": "Telegram", "region": "Delhi", "topic": "#BankingScam", "username": "@delhi_alerts_hub", "text": "Bhai log sab log savdhaan raho, fake HDFC electricity bill cut message aa raha hai. Kisi bhi link pe click mat karna!"},
-    {"platform": "X", "region": "Karnataka", "topic": "#BankingScam", "username": "@bengaluru_techie_kiran", "text": "Another UPI reverse payment refund scam doing rounds on WhatsApp groups. Scammers asking for PIN to 'receive' money."},
-    {"platform": "Instagram", "region": "Gujarat", "topic": "#BankingScam", "username": "@ahmedabad_updates", "text": "Urgent Alert: Fake Aadhaar verification link circulating in Surat and Ahmedabad. Bank accounts drained in minutes."},
-    {"platform": "Telegram", "region": "Uttar Pradesh", "topic": "#BankingScam", "username": "@up_rozgar_portal_fake", "text": "Sarkari kisan subsidy claim karein abhi! Click link to receive Rs 6000 directly in bank without OTP: bit.ly/pm-kisan-claim-2026"},
-    {"platform": "X", "region": "Telangana", "topic": "#BankingScam", "username": "@hyderabad_safe_cyber", "text": "Cyberabad police issues fresh advisory regarding fake part-time YouTube video like job scams. Over 40 cases reported this week."},
-    {"platform": "X", "region": "West Bengal", "topic": "#BankingScam", "username": "@kolkata_voice_99", "text": "Fake job offer letter with forged Tata Consultancy stamp sent to hundreds of college freshers in Salt Lake."},
-    {"platform": "YouTube", "region": "Punjab", "topic": "#BankingScam", "username": "@punjab_tech_guru", "text": "Live Demo: Kaise pehchane fake banking APK files aur cyber fraud se kaise bachein."},
+    {"platform": "X", "region": "Maharashtra", "topic": "#BankingScamAlert", "username": "@mumbai_citizen_ravi", "text": "WARNING! Just received an SMS claiming my SBI bank account will be blocked tonight if I do not update PAN card on this link. Total scam, please do not click!"},
+    {"platform": "Telegram", "region": "Delhi", "topic": "#BankingScamAlert", "username": "@delhi_security_alerts", "text": "Urgent alert for everyone: Fake electricity bill payment messages are circulating claiming power will be cut tonight. Do not click on any suspicious links!"},
+    {"platform": "X", "region": "Karnataka", "topic": "#BankingScamAlert", "username": "@bengaluru_tech_news", "text": "New UPI refund scam circulating on social groups. Scammers are asking people to enter their UPI PIN to 'receive' cash rewards."},
+    {"platform": "Instagram", "region": "Gujarat", "topic": "#BankingScamAlert", "username": "@ahmedabad_updates", "text": "Emergency Advisory: Fake biometric verification link circulating in Surat and Ahmedabad. Citizens report bank accounts drained."},
+    {"platform": "Telegram", "region": "Uttar Pradesh", "topic": "#BankingScamAlert", "username": "@free_kisan_subsidy_bot", "text": "Claim your agricultural subsidy reward now! Click the link to receive 6000 rupees directly without entering any OTP."},
+    {"platform": "X", "region": "Telangana", "topic": "#BankingScamAlert", "username": "@hyderabad_safe_cyber", "text": "Cyber police department issues new advisory regarding fake part-time video rating job offers. Over 40 fraud cases registered."},
+    {"platform": "X", "region": "West Bengal", "topic": "#BankingScamAlert", "username": "@kolkata_voice_today", "text": "Fake job appointment letters with forged corporate stamps sent to college freshers in Kolkata asking for security deposit fees."},
+    {"platform": "YouTube", "region": "Punjab", "topic": "#BankingScamAlert", "username": "@punjab_tech_guide", "text": "Video Tutorial: How to identify fake banking APK apps and protect your mobile device from unauthorized access."},
 
-    # --- Exams & Student Protests ---
-    {"platform": "X", "region": "Delhi", "topic": "#UPSCProtest", "username": "@delhi_student_union", "text": "Massive peaceful demonstration at Mukherjee Nagar demanding transparency in normalization process. Police barricades placed."},
-    {"platform": "Telegram", "region": "Uttar Pradesh", "topic": "#PaperLeakHoax", "username": "@up_leak_news_fast", "text": "Breaking! Kal hone wale state recruitment exam ka complete paper leak ho gaya hai! Join channel for full PDF leak!"},
-    {"platform": "X", "region": "Bihar", "topic": "#PaperLeakHoax", "username": "@bihar_youth_front", "text": "Rumors of paper leak in Patna center are completely FALSE. DM Patna confirmed exam commenced smoothly. Do not spread panic."},
-    {"platform": "Instagram", "region": "Rajasthan", "topic": "#StudentAlert", "username": "@jaipur_aspirants_hub", "text": "Police deployed across exam centers in Kota & Jaipur. Strict 144 imposed near centers. Sab log calm rahein."},
-    {"platform": "X", "region": "Madhya Pradesh", "topic": "#UPSCProtest", "username": "@bhopal_student_cell", "text": "Students memorandum submitted peacefully to Education Board. No violence reported."},
+    # --- Exams & Student Demonstrations ---
+    {"platform": "X", "region": "Delhi", "topic": "#ExamPaperLeakRumor", "username": "@delhi_student_union", "text": "Peaceful student gathering outside education center demanding transparent review procedures. Barricades placed by security."},
+    {"platform": "Telegram", "region": "Uttar Pradesh", "topic": "#ExamPaperLeakRumor", "username": "@leak_alerts_fast_news", "text": "Breaking news! Tomorrow's state government recruitment exam question paper has been leaked! Join this channel for full PDF download!"},
+    {"platform": "X", "region": "Bihar", "topic": "#ExamPaperLeakRumor", "username": "@bihar_factcheck_desk", "text": "Official Notice: Rumors regarding exam paper leaks in Patna are completely FALSE. The examination commenced on time in all centers."},
+    {"platform": "Instagram", "region": "Rajasthan", "topic": "#ExamPaperLeakRumor", "username": "@jaipur_aspirants_cell", "text": "Security personnel deployed at all examination centers across Jaipur. Strict safety guidelines are active. Students stay calm."},
+    {"platform": "X", "region": "Madhya Pradesh", "topic": "#ExamPaperLeakRumor", "username": "@bhopal_student_forum", "text": "Student representatives submitted their suggestions to the board peacefully. Official press briefing scheduled for evening."},
 
     # --- Deepfakes & Synthetic Media ---
-    {"platform": "X", "region": "Maharashtra", "topic": "#DeepfakeAlert", "username": "@factcheck_india_mumbai", "text": "ALERT: The viral audio clip claiming CM ordered bank closures is 100% AI SYNTHETIC AUDIO. Voice cloned using deep learning tool."},
-    {"platform": "YouTube", "region": "Delhi", "topic": "#DeepfakeAlert", "username": "@cyber_netra_desk", "text": "Detailed forensic breakdown of the viral election speech deepfake. Note the artifact glitching around the lip-sync area."},
-    {"platform": "Instagram", "region": "Karnataka", "topic": "#DeepfakeAlert", "username": "@bengaluru_fact_lab", "text": "Beware of fake viral video showing celebrity endorsing dubious crypto trading application. Pure deepfake fraud!"},
-    {"platform": "Telegram", "region": "Tamil Nadu", "topic": "#DeepfakeAlert", "username": "@chennai_viral_media", "text": "Viral video showing explosion at Chennai port is an old Lebanese footage from 2020 miscaptioned. Don't forward!"},
+    {"platform": "X", "region": "Maharashtra", "topic": "#DeepfakeVideoAlert", "username": "@factcheck_desk_india", "text": "ALERT: The viral audio recording claiming emergency bank closures is a 100% AI SYNTHETIC VOICE CLONE. Do not forward."},
+    {"platform": "YouTube", "region": "Delhi", "topic": "#DeepfakeVideoAlert", "username": "@cyber_intelligence_lab", "text": "Technical breakdown of the viral election speech deepfake: Notice unnatural lighting and distorted facial edges around mouth movement."},
+    {"platform": "Instagram", "region": "Karnataka", "topic": "#DeepfakeVideoAlert", "username": "@bengaluru_tech_watch", "text": "Beware of fake viral video showing a celebrity promoting an unverified crypto trading application. It is an AI deepfake scam!"},
+    {"platform": "Telegram", "region": "Tamil Nadu", "topic": "#DeepfakeVideoAlert", "username": "@chennai_viral_stream", "text": "Old explosion footage from another country is being miscaptioned as Chennai port incident. Fact-checkers confirm it is false."},
 
-    # --- Civil Infrastructure & Emergencies ---
-    {"platform": "X", "region": "Delhi", "topic": "#InfraUpdate", "username": "@delhi_metro_riders", "text": "Yellow line services operating normally with slight 5 min delay due to signaling upgrade at Kashmere Gate."},
-    {"platform": "Telegram", "region": "Maharashtra", "topic": "#EmergencyHoax", "username": "@mumbai_blast_rumor_bot", "text": "URGENT WARNING: Water supply across South Mumbai poisoned by terrorists! Do not drink tap water tonight!"},
-    {"platform": "X", "region": "Maharashtra", "topic": "#FactCheck", "username": "@mumbai_police_factcheck", "text": "The message claiming Mumbai water contamination is an UTTER HOAX. Strict legal action being initiated against miscreants."},
-    {"platform": "X", "region": "Karnataka", "topic": "#BengaluruInfra", "username": "@whitefield_commuters", "text": "Outer Ring Road flyover repair work completed ahead of schedule. Traffic flowing smoothly towards Bellandur."},
-    {"platform": "Instagram", "region": "Kerala", "topic": "#KeralaMonsoon", "username": "@kochi_weather_watch", "text": "Orange alert issued for Idukki and Wayanad districts. District administration has SDRF teams on high alert."},
-    {"platform": "X", "region": "Tamil Nadu", "topic": "#ChennaiRains", "username": "@chennai_traffic_official", "text": "All subway underpasses cleared of storm water. Metropolitan transport running uninterrupted across the city."},
-    {"platform": "X", "region": "Assam", "topic": "#AssamFloods", "username": "@guwahati_relief_unit", "text": "Brahmaputra water levels receded below danger mark in Kaziranga sector. Relief distribution actively ongoing."},
-    {"platform": "X", "region": "Odisha", "topic": "#CycloneAlert", "username": "@bhubaneswar_met_centre", "text": "Low pressure area over Bay of Bengal moved towards north-east. No threat of severe cyclone to Odisha coast."},
+    # --- Public Safety & City Infrastructure ---
+    {"platform": "X", "region": "Delhi", "topic": "#CitySafetyUpdate", "username": "@delhi_metro_updates", "text": "Yellow line metro train operations running on schedule with minor 3-minute delay due to routine track inspection at station."},
+    {"platform": "Telegram", "region": "Maharashtra", "topic": "#EmergencyRumorHoax", "username": "@mumbai_panic_alert_bot", "text": "URGENT ALARM: City tap water supply in South Mumbai has been poisoned! Do not drink any municipal water tonight!"},
+    {"platform": "X", "region": "Maharashtra", "topic": "#CitySafetyUpdate", "username": "@mumbai_police_factcheck", "text": "The viral message claiming contaminated tap water in Mumbai is completely FALSE. Strict legal action is underway against creators."},
+    {"platform": "X", "region": "Karnataka", "topic": "#CitySafetyUpdate", "username": "@bengaluru_traffic_live", "text": "Flyover maintenance work near Ring Road completed ahead of schedule. Traffic movement is flowing smoothly now."},
+    {"platform": "Instagram", "region": "Kerala", "topic": "#WeatherSafetyAlert", "username": "@kochi_weather_patrol", "text": "Weather department issues rain advisory for two districts. Disaster response teams are on standby with clear emergency helpline numbers."},
+    {"platform": "X", "region": "Tamil Nadu", "topic": "#WeatherSafetyAlert", "username": "@chennai_civic_cell", "text": "City drainage pumps operational across major subway roads. Public transportation is running without disruption."},
+    {"platform": "X", "region": "Assam", "topic": "#WeatherSafetyAlert", "username": "@guwahati_relief_unit", "text": "River water levels have receded below danger threshold. Relief supplies distribution is proceeding smoothly."},
+    {"platform": "X", "region": "Odisha", "topic": "#WeatherSafetyAlert", "username": "@odisha_disaster_monitor", "text": "Coastal low-pressure area has moved further into the sea. Normal fishing and port operations resumed safely."},
 
-    # --- Astroturfing & Bot Campaign Posts ---
-    {"platform": "X", "region": "Delhi", "topic": "#BoycottECommerce", "username": "@bot_desi_trend_01", "text": "Boycott all online shopping platforms immediately! They are stealing Indian user biometric data! Retweet 100 times! #BoycottECommerce"},
-    {"platform": "X", "region": "Maharashtra", "topic": "#BoycottECommerce", "username": "@bot_desi_trend_02", "text": "Boycott all online shopping platforms immediately! They are stealing Indian user biometric data! Retweet 100 times! #BoycottECommerce"},
-    {"platform": "X", "region": "Karnataka", "topic": "#BoycottECommerce", "username": "@bot_desi_trend_03", "text": "Boycott all online shopping platforms immediately! They are stealing Indian user biometric data! Retweet 100 times! #BoycottECommerce"},
-    {"platform": "X", "region": "Punjab", "topic": "#BoycottECommerce", "username": "@bot_desi_trend_04", "text": "Boycott all online shopping platforms immediately! They are stealing Indian user biometric data! Retweet 100 times! #BoycottECommerce"},
-    {"platform": "X", "region": "Gujarat", "topic": "#BoycottECommerce", "username": "@bot_desi_trend_05", "text": "Boycott all online shopping platforms immediately! They are stealing Indian user biometric data! Retweet 100 times! #BoycottECommerce"},
+    # --- Automated Spam & Fake Bot Campaigns ---
+    {"platform": "X", "region": "Delhi", "topic": "#BoycottOnlineRetailers", "username": "@spam_bot_node_01", "text": "Boycott all online shopping apps immediately! They are stealing personal user information! Retweet 100 times! #BoycottOnlineRetailers"},
+    {"platform": "X", "region": "Maharashtra", "topic": "#BoycottOnlineRetailers", "username": "@spam_bot_node_02", "text": "Boycott all online shopping apps immediately! They are stealing personal user information! Retweet 100 times! #BoycottOnlineRetailers"},
+    {"platform": "X", "region": "Karnataka", "topic": "#BoycottOnlineRetailers", "username": "@spam_bot_node_03", "text": "Boycott all online shopping apps immediately! They are stealing personal user information! Retweet 100 times! #BoycottOnlineRetailers"},
+    {"platform": "X", "region": "Punjab", "topic": "#BoycottOnlineRetailers", "username": "@spam_bot_node_04", "text": "Boycott all online shopping apps immediately! They are stealing personal user information! Retweet 100 times! #BoycottOnlineRetailers"},
+    {"platform": "X", "region": "Gujarat", "topic": "#BoycottOnlineRetailers", "username": "@spam_bot_node_05", "text": "Boycott all online shopping apps immediately! They are stealing personal user information! Retweet 100 times! #BoycottOnlineRetailers"},
 
-    # --- National Tech & Innovation Topics ---
-    {"platform": "X", "region": "Karnataka", "topic": "#DigitalIndia2026", "username": "@isro_space_enthusiast", "text": "Tremendous pride seeing Indian quantum computing startups securing international breakthrough patents!"},
-    {"platform": "YouTube", "region": "Telangana", "topic": "#DigitalIndia2026", "username": "@hyderabad_startup_hub", "text": "T-Hub announces 50 new AI security incubator cohorts with DST grant backing. Great milestone!"},
-    {"platform": "Instagram", "region": "Maharashtra", "topic": "#CyberSafeIndia", "username": "@pune_cyber_cell", "text": "Free cyber hygiene workshop conducted for 1,200 senior citizens across Pune on preventing phishing calls."},
-    {"platform": "X", "region": "Delhi", "topic": "#CyberSafeIndia", "username": "@cert_in_official_feed", "text": "Advisory CI-2026-088: Patches released for multi-vendor router zero-day vulnerability. Update firmware now."},
-    {"platform": "X", "region": "Tamil Nadu", "topic": "#SemiconductorMission", "username": "@tamilnadu_tech_board", "text": "Coimbatore advanced electronic fabrication unit inaugurated. Projected to generate 8,000 high-tech jobs."},
+    # --- National Technology & Cybersecurity Awareness ---
+    {"platform": "X", "region": "Karnataka", "topic": "#TechInnovationIndia", "username": "@space_research_watcher", "text": "Huge milestone as Indian indigenous semiconductor and quantum computing startups receive international innovation awards!"},
+    {"platform": "YouTube", "region": "Telangana", "topic": "#TechInnovationIndia", "username": "@hyderabad_innovation_hub", "text": "Technology incubator announces funding grants for 50 new artificial intelligence security startup companies."},
+    {"platform": "Instagram", "region": "Maharashtra", "topic": "#CyberSafetyAwareness", "username": "@pune_cyber_division", "text": "Cyber safety workshop conducted for 1,200 citizens on how to avoid digital arrest phone scams and fraudulent calls."},
+    {"platform": "X", "region": "Delhi", "topic": "#CyberSafetyAwareness", "username": "@national_cert_official", "text": "Security Advisory: Router security updates released to fix software vulnerabilities. Please update device firmware immediately."},
+    {"platform": "X", "region": "Tamil Nadu", "topic": "#TechInnovationIndia", "username": "@tamilnadu_tech_board", "text": "New advanced electronics fabrication facility inaugurated in Coimbatore, creating thousands of specialized engineering jobs."},
 
-    # --- Governance & Elections 2026 ---
-    {"platform": "X", "region": "Uttar Pradesh", "topic": "#Elections2026", "username": "@lucknow_civic_poll", "text": "Election Commission releases updated digital voter slip app with enhanced privacy safeguards and biometric verification."},
-    {"platform": "Telegram", "region": "West Bengal", "topic": "#Elections2026", "username": "@bengal_electoral_watch", "text": "Fake viral circular claiming voting date postponed in 4 districts is baseless. Polling will take place as scheduled."},
-    {"platform": "X", "region": "Bihar", "topic": "#Elections2026", "username": "@patna_news_network", "text": "Over 72% voter turnout recorded peacefully in Phase 1 elections across state constituencies."},
-    {"platform": "X", "region": "Punjab", "topic": "#PunjabGovernance", "username": "@amritsar_voice", "text": "State government launches single-window grievance portal for rural farmers and tube-well power connections."},
-    {"platform": "Instagram", "region": "Rajasthan", "topic": "#SolarMission", "username": "@bikaner_green_power", "text": "World's largest desert solar park in Bhadla achieves milestone 4 GW renewable generation output today!"},
-
-    # --- Health & Medical Misinformation ---
-    {"platform": "Telegram", "region": "Kerala", "topic": "#MedicalHoax", "username": "@ayur_remedies_fast", "text": "Miracle boiled papaya seed cure for all viral diseases hidden by pharma companies! Drink 3 times daily!"},
-    {"platform": "X", "region": "Kerala", "topic": "#HealthFactCheck", "username": "@kerala_health_mission", "text": "Public Health Advisory: Please do not consume unverified home concoctions for viral fevers. Consult nearest PHC."},
-    {"platform": "X", "region": "Delhi", "topic": "#AirQualityAlert", "username": "@delhi_pollution_tracker", "text": "AQI recorded at 145 (Moderate) across Anand Vihar and RK Puram monitoring stations. Favorable wind speed helping dispersal."},
-    {"platform": "Instagram", "region": "Maharashtra", "topic": "#HealthFactCheck", "username": "@mumbai_doctors_forum", "text": "Debunking the fake WhatsApp forward claiming paracetamol tablets contaminated with Machupo virus. Completely false hoax."},
-    {"platform": "X", "region": "Gujarat", "topic": "#AyushmanBharat", "username": "@gujarat_health_gov", "text": "Over 50,000 cashless cardiac surgeries successfully conducted under Ayushman card scheme in Ahmedabad hospitals."}
+    # --- Public Announcements & Verified News ---
+    {"platform": "X", "region": "Uttar Pradesh", "topic": "#PublicElectionNotice", "username": "@lucknow_civic_desk", "text": "Election Commission releases digital voter slip mobile application with end-to-end security and encrypted data protection."},
+    {"platform": "Telegram", "region": "West Bengal", "topic": "#PublicElectionNotice", "username": "@bengal_factcheck_stream", "text": "The viral document claiming voting date change is an unofficial forgery. Official election dates remain unchanged."},
+    {"platform": "X", "region": "Bihar", "topic": "#PublicElectionNotice", "username": "@patna_news_today", "text": "High voter participation recorded peacefully across state voting centers with zero safety incidents reported."},
+    {"platform": "X", "region": "Punjab", "topic": "#AgriculturalUpdate", "username": "@amritsar_farmer_voice", "text": "State government launches single-window solar power connection subsidy portal for rural farming communities."},
+    {"platform": "Instagram", "region": "Rajasthan", "topic": "#RenewableEnergy", "username": "@bikaner_clean_energy", "text": "Desert solar installation in Bhadla achieves record 4 Gigawatt clean renewable energy generation milestone today!"}
 ]
 
-# Expanding with 15+ more targeted variants to surpass 50+ posts
 EXTENDED_POSTS = [
-    {"platform": "Telegram", "region": "Delhi", "topic": "#BankingScam", "username": "@free_recharge_5g_bot", "text": "Jio-Airtel 1 Year 5G recharge free offer for festival! Click link now before midnight: bit.ly/free-5g-recharge-india"},
-    {"platform": "X", "region": "Uttar Pradesh", "topic": "#CyberCrimeAlert", "username": "@varanasi_police_desk", "text": "Beware of digital arrest calls impersonating CBI or Customs officials on Skype/WhatsApp video calls. Report to 1930."},
-    {"platform": "X", "region": "Maharashtra", "topic": "#CyberCrimeAlert", "username": "@cyber_crime_thane", "text": "Senior citizen saved from losing 45 Lakhs in fake FedEx parcel courier scam due to timely intervention of bank manager."},
-    {"platform": "Instagram", "region": "Karnataka", "topic": "#TechInnovation", "username": "@iisc_bangalore_research", "text": "IISc researchers develop low-cost indigenous water desalination membranes for rural villages."},
-    {"platform": "X", "region": "Telangana", "topic": "#CyberThreatAlert", "username": "@hyderabad_infosec", "text": "Malicious Android APK disguised as 'Electricity Bill Payment' found exfiltrating OTPs from banking devices in Telangana."},
-    {"platform": "X", "region": "West Bengal", "topic": "#CyberSecurity", "username": "@wb_cyber_patrol", "text": "Notice: 12 fraudulent call centers in Sector V Kolkata raided. 24 accused arrested in illegal loan app racket."},
-    {"platform": "X", "region": "Punjab", "topic": "#AgriTech2026", "username": "@ludhiana_pau_agri", "text": "Drone-based nano-urea spraying demonstration conducted for 500 progressive paddy farmers in Ludhiana."},
-    {"platform": "Telegram", "region": "Bihar", "topic": "#CryptoFraud", "username": "@bihar_crypto_pump99", "text": "Guaranteed 500% profit in 24 hours on Telegram crypto bot investment! Send USDT to receive instant double payout!"},
-    {"platform": "X", "region": "Rajasthan", "topic": "#CyberTourism", "username": "@rajasthan_tourism_police", "text": "Tourists advised to book wildlife safari permits ONLY through official sso.rajasthan.gov.in portal. Fake sites blacklisted."},
-    {"platform": "YouTube", "region": "Madhya Pradesh", "topic": "#DigitalLiteracy", "username": "@indore_tech_shiksha", "text": "Cyber Suraksha 101: Kaise karein two-factor authentication enable apne Google aur WhatsApp account par."},
-    {"platform": "X", "region": "Assam", "topic": "#DisinformationWatch", "username": "@assam_police_factcheck", "text": "Fake video attributing communal clash to Kokrajhar is old footage from another country. Criminal case registered against handles."},
-    {"platform": "X", "region": "Odisha", "topic": "#TechNews", "username": "@odisha_skill_mission", "text": "World Skill Center Bhubaneswar graduates 2,400 students in advanced cybersecurity and robotics automation streams."}
+    {"platform": "Telegram", "region": "Delhi", "topic": "#BankingScamAlert", "username": "@fake_recharge_5g_bot", "text": "Free 1-Year unlimited 5G mobile recharge offer! Click link now to activate before offer expires tonight: bit.ly/free-5g-telecom"},
+    {"platform": "X", "region": "Uttar Pradesh", "topic": "#CyberSafetyAwareness", "username": "@varanasi_police_desk", "text": "Advisory: Beware of fraudsters making video calls claiming to be police officers threatening fake arrest warrants. Report to 1930."},
+    {"platform": "X", "region": "Maharashtra", "topic": "#CyberSafetyAwareness", "username": "@thane_cyber_patrol", "text": "Elderly citizen protected from losing life savings in fake courier delivery scam thanks to alert bank officer."},
+    {"platform": "Instagram", "region": "Karnataka", "topic": "#TechInnovationIndia", "username": "@iisc_research_updates", "text": "Scientists develop affordable indigenous clean water filtration membranes for remote rural settlements."},
+    {"platform": "X", "region": "Telangana", "topic": "#CyberSafetyAwareness", "username": "@hyderabad_infosec_feed", "text": "Security Alert: Fake Android app named 'Quick Electricity Bill' found stealing banking SMS verification codes."},
+    {"platform": "X", "region": "West Bengal", "topic": "#CyberSafetyAwareness", "username": "@wb_cyber_police", "text": "Notice: 12 fraudulent call centers raided in Kolkata. 24 suspects arrested in connection with illegal loan app scams."},
+    {"platform": "X", "region": "Punjab", "topic": "#AgriculturalUpdate", "username": "@ludhiana_agri_desk", "text": "Automated drone pesticide spraying demonstration conducted successfully for 500 wheat farmers."},
+    {"platform": "Telegram", "region": "Bihar", "topic": "#CryptoFraudAlert", "username": "@fake_crypto_profit_bot", "text": "Guaranteed 500% cash returns in 24 hours! Send cryptocurrency to receive double deposit instantly!"},
+    {"platform": "X", "region": "Rajasthan", "topic": "#CyberSafetyAwareness", "username": "@rajasthan_tourism_safety", "text": "Travel Advisory: Book state wildlife safari permits only through official government portal. Fake duplicate sites blocked."},
+    {"platform": "YouTube", "region": "Madhya Pradesh", "topic": "#CyberSafetyAwareness", "username": "@digital_security_101", "text": "Video Guide: How to easily turn on two-step verification security on your email and messaging apps."},
+    {"platform": "X", "region": "Assam", "topic": "#FactCheckDesk", "username": "@assam_police_factcheck", "text": "Fake video showing old foreign civil disturbance is falsely tagged as local event. Legal notices sent to spreading accounts."},
+    {"platform": "X", "region": "Odisha", "topic": "#TechInnovationIndia", "username": "@odisha_skill_center", "text": "Skill training center graduates 2,400 students in modern cybersecurity and software engineering domains."}
 ]
 
 SAMPLE_BOTS = [
-    {"username": "@bot_desi_trend_01", "platform": "X", "followers": 12, "following": 4890, "posts_per_hr": 84.0, "account_age": 4},
-    {"username": "@bot_desi_trend_02", "platform": "X", "followers": 8, "following": 4910, "posts_per_hr": 88.5, "account_age": 4},
-    {"username": "@bot_desi_trend_03", "platform": "X", "followers": 15, "following": 4820, "posts_per_hr": 79.0, "account_age": 3},
-    {"username": "@bot_desi_trend_04", "platform": "X", "followers": 5, "following": 4950, "posts_per_hr": 92.0, "account_age": 2},
-    {"username": "@bot_desi_trend_05", "platform": "X", "followers": 19, "following": 4800, "posts_per_hr": 81.0, "account_age": 5},
-    {"username": "@free_recharge_5g_bot", "platform": "Telegram", "followers": 3, "following": 3400, "posts_per_hr": 55.0, "account_age": 6},
-    {"username": "@mumbai_blast_rumor_bot", "platform": "Telegram", "followers": 22, "following": 2900, "posts_per_hr": 62.0, "account_age": 8},
-    {"username": "@bihar_crypto_pump99", "platform": "Telegram", "followers": 14, "following": 4100, "posts_per_hr": 48.0, "account_age": 11},
-    {"username": "@up_leak_news_fast", "platform": "Telegram", "followers": 45, "following": 2200, "posts_per_hr": 38.0, "account_age": 14},
+    {"username": "@spam_bot_node_01", "platform": "X", "followers": 12, "following": 4890, "posts_per_hr": 84.0, "account_age": 4},
+    {"username": "@spam_bot_node_02", "platform": "X", "followers": 8, "following": 4910, "posts_per_hr": 88.5, "account_age": 4},
+    {"username": "@spam_bot_node_03", "platform": "X", "followers": 15, "following": 4820, "posts_per_hr": 79.0, "account_age": 3},
+    {"username": "@spam_bot_node_04", "platform": "X", "followers": 5, "following": 4950, "posts_per_hr": 92.0, "account_age": 2},
+    {"username": "@spam_bot_node_05", "platform": "X", "followers": 19, "following": 4800, "posts_per_hr": 81.0, "account_age": 5},
+    {"username": "@fake_recharge_5g_bot", "platform": "Telegram", "followers": 3, "following": 3400, "posts_per_hr": 55.0, "account_age": 6},
+    {"username": "@mumbai_panic_alert_bot", "platform": "Telegram", "followers": 22, "following": 2900, "posts_per_hr": 62.0, "account_age": 8},
+    {"username": "@fake_crypto_profit_bot", "platform": "Telegram", "followers": 14, "following": 4100, "posts_per_hr": 48.0, "account_age": 11},
+    {"username": "@leak_alerts_fast_news", "platform": "Telegram", "followers": 45, "following": 2200, "posts_per_hr": 38.0, "account_age": 14},
     {"username": "@mumbai_citizen_ravi", "platform": "X", "followers": 1420, "following": 510, "posts_per_hr": 1.2, "account_age": 1400},
-    {"username": "@bengaluru_techie_kiran", "platform": "X", "followers": 8900, "following": 620, "posts_per_hr": 0.8, "account_age": 2100},
-    {"username": "@cert_in_official_feed", "platform": "X", "followers": 95000, "following": 45, "posts_per_hr": 0.4, "account_age": 3500}
+    {"username": "@bengaluru_tech_news", "platform": "X", "followers": 8900, "following": 620, "posts_per_hr": 0.8, "account_age": 2100},
+    {"username": "@national_cert_official", "platform": "X", "followers": 95000, "following": 45, "posts_per_hr": 0.4, "account_age": 3500}
 ]
 
 SAMPLE_LINKS = [
     {"url": "http://secure-login-hdfc-kyc-update.xyz/verify-pan"},
     {"url": "http://192.168.45.12/sbi-yono-apk-download.apk"},
     {"url": "http://gov-portal-subsidy-claim-forms.online/free-kisan"},
-    {"url": "http://jio-5g-unlimited-festival-recharge.site/claim"},
-    {"url": "http://upsc-paper-leak-question-pdf.ru/download.zip"},
-    {"url": "http://pm-kisan-yojana-aadhaar-update.buzz/login"},
+    {"url": "http://free-5g-telecom-recharge-bonus.site/claim"},
+    {"url": "http://exam-question-paper-leak-download.ru/download.zip"},
+    {"url": "http://urgent-bank-pan-card-update.buzz/login"},
     {"url": "https://cybercrime.gov.in"},
     {"url": "https://sbi.co.in"},
     {"url": "https://cert-in.org.in"},
@@ -121,14 +113,14 @@ def seed_database(db: Session = None):
         should_close = True
 
     try:
-        # Check if already seeded
-        if db.query(Post).count() >= 50:
-            print("[INFO] Database already populated with 50+ posts.")
-            return
+        # Clear existing posts to refresh with pure English dataset
+        db.query(Post).delete()
+        db.query(BotProfile).delete()
+        db.query(LinkScan).delete()
+        db.commit()
 
-        print("[INFO] Seeding Tech Netra with 50+ Indian social media posts and threat intelligence...")
+        print("[INFO] Seeding Tech Netra with 50+ pure English social media posts and verified threat data...")
 
-        # 1. Seed Posts with NLP & Geocoding Analysis
         all_post_records = SAMPLE_INDIAN_POSTS + EXTENDED_POSTS
         post_objects = []
         base_time = datetime.utcnow()
@@ -137,13 +129,12 @@ def seed_database(db: Session = None):
             coords = ThreatAnalyzerService.get_coordinates_for_region(item["region"])
             analysis = ThreatAnalyzerService.analyze_text(item["text"])
             
-            # Add small random delta to coords so markers don't overlap completely
-            lat = coords[0] + random.uniform(-0.08, 0.08)
-            lon = coords[1] + random.uniform(-0.08, 0.08)
+            lat = coords[0] + random.uniform(-0.06, 0.06)
+            lon = coords[1] + random.uniform(-0.06, 0.06)
             
             post_time = base_time - timedelta(minutes=random.randint(5, 1440))
             likes = random.randint(50, 4500) if not analysis["is_flagged"] else random.randint(2, 450)
-            retweets = random.randint(10, 1200) if not analysis["is_flagged"] else random.randint(50, 2400) # Bots burst retweet
+            retweets = random.randint(10, 1200) if not analysis["is_flagged"] else random.randint(50, 2400)
 
             post_obj = Post(
                 platform=item["platform"],
@@ -165,9 +156,8 @@ def seed_database(db: Session = None):
 
         db.add_all(post_objects)
         db.commit()
-        print(f"[SUCCESS] Seeded {len(post_objects)} social media posts across 15 Indian regions.")
+        print(f"[SUCCESS] Seeded {len(post_objects)} social media posts across 15 Indian regions in pure English.")
 
-        # 2. Seed Bot Profiles
         bot_objects = []
         for b in SAMPLE_BOTS:
             bot_data = ThreatAnalyzerService.analyze_bot_profile(
@@ -193,9 +183,8 @@ def seed_database(db: Session = None):
 
         db.add_all(bot_objects)
         db.commit()
-        print(f"[SUCCESS] Seeded {len(bot_objects)} bot profiles and astroturfing clusters.")
+        print(f"[SUCCESS] Seeded {len(bot_objects)} bot profiles.")
 
-        # 3. Seed Link Scans
         link_objects = []
         for l in SAMPLE_LINKS:
             scan_res = ThreatAnalyzerService.scan_url(l["url"])
@@ -211,7 +200,7 @@ def seed_database(db: Session = None):
 
         db.add_all(link_objects)
         db.commit()
-        print(f"[SUCCESS] Seeded {len(link_objects)} scanned URL intelligence records.")
+        print(f"[SUCCESS] Seeded {len(link_objects)} scanned URL records.")
 
     finally:
         if should_close:

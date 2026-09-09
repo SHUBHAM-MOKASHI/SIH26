@@ -4,13 +4,13 @@ import {
   MapPin, 
   Search, 
   Filter, 
-  SlidersHorizontal, 
   Eye, 
   Flag, 
   Download, 
   CheckCircle,
   AlertTriangle,
-  Radio
+  Radio,
+  Copy
 } from 'lucide-react';
 
 export default function LiveIncidentStream({ 
@@ -44,7 +44,7 @@ export default function LiveIncidentStream({
     const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(filteredPosts, null, 2));
     const downloadAnchor = document.createElement('a');
     downloadAnchor.setAttribute("href", dataStr);
-    downloadAnchor.setAttribute("download", `technetra_incidents_${new Date().toISOString().slice(0,10)}.json`);
+    downloadAnchor.setAttribute("download", `technetra_alerts_${new Date().toISOString().slice(0,10)}.json`);
     document.body.appendChild(downloadAnchor);
     downloadAnchor.click();
     downloadAnchor.remove();
@@ -73,22 +73,22 @@ export default function LiveIncidentStream({
           <div className="flex items-center gap-2">
             <h3 className="font-bold text-base text-white flex items-center gap-2">
               <ShieldAlert className="w-5 h-5 text-red-400" />
-              Live Incident & Threat Stream
+              Live Safety Feed & Flagged Posts
             </h3>
             <span className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-red-950/80 text-red-400 border border-red-800 text-xs font-mono font-bold">
               <Radio className="w-3 h-3 animate-ping" /> {filteredPosts.length} ALERTS
             </span>
           </div>
-          <p className="text-xs text-slate-400 font-mono mt-0.5">
-            Realtime flagged posts, disinformation flares & suspicious payloads
+          <p className="text-xs text-slate-400 font-sans mt-0.5">
+            Real-time messages flagged as fake news, bank scams, or misleading rumors.
           </p>
         </div>
 
-        {/* Global Filter Tags & Export Button */}
+        {/* Global Filter Tags & Download Button */}
         <div className="flex items-center gap-2">
           {(selectedTopic || selectedRegion) && (
             <div className="flex items-center gap-1.5 text-xs font-mono bg-cyan-950/80 border border-cyan-500/40 px-3 py-1.5 rounded-xl text-cyan-300">
-              <span>Filter: {selectedTopic || selectedRegion}</span>
+              <span>Filter: <strong>{selectedTopic || selectedRegion}</strong></span>
               <button 
                 onClick={onClearFilters}
                 className="ml-1 text-slate-400 hover:text-white font-bold"
@@ -100,33 +100,33 @@ export default function LiveIncidentStream({
 
           <button
             onClick={exportFilteredIncidents}
-            className="px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-700 hover:border-cyan-500/60 text-slate-200 hover:text-cyan-300 text-xs font-mono transition flex items-center gap-1.5"
-            title="Export Incidents to JSON"
+            className="px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-700 hover:border-cyan-500/60 text-slate-200 hover:text-cyan-300 text-xs font-sans font-medium transition flex items-center gap-1.5"
+            title="Download list of alerts"
           >
-            <Download className="w-3.5 h-3.5 text-cyan-400" /> Export Feed
+            <Download className="w-3.5 h-3.5 text-cyan-400" /> Download Feed
           </button>
         </div>
       </div>
 
-      {/* Filter Controls Row */}
+      {/* Simple Filter Controls */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         <div className="relative">
           <Search className="w-4 h-4 absolute left-3 top-3 text-slate-400" />
           <input
             type="text"
-            placeholder="Search keywords, handles, regions..."
+            placeholder="Search keywords, usernames, or states..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-9 pr-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white outline-none focus:border-cyan-500 font-mono"
+            className="w-full pl-9 pr-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white outline-none focus:border-cyan-500 font-sans"
           />
         </div>
 
         <select
           value={platformFilter}
           onChange={(e) => setPlatformFilter(e.target.value)}
-          className="px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white outline-none font-mono"
+          className="px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white outline-none font-sans"
         >
-          <option value="">All Platforms</option>
+          <option value="">All Social Platforms</option>
           <option value="X">X (Twitter)</option>
           <option value="Telegram">Telegram</option>
           <option value="Instagram">Instagram</option>
@@ -136,16 +136,16 @@ export default function LiveIncidentStream({
         <select
           value={riskFilter}
           onChange={(e) => setRiskFilter(e.target.value)}
-          className="px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white outline-none font-mono"
+          className="px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white outline-none font-sans"
         >
-          <option value="">All Risk Levels</option>
-          <option value="High">High Risk / Critical</option>
+          <option value="">All Threat Levels</option>
+          <option value="High">High Risk / Scam</option>
           <option value="Medium">Medium Risk</option>
-          <option value="Low">Low Risk</option>
+          <option value="Low">Low Risk / Safe</option>
         </select>
       </div>
 
-      {/* Incident Stream Table / Cards */}
+      {/* Incident Stream List */}
       <div className="space-y-3 max-h-[500px] overflow-y-auto pr-1">
         {filteredPosts.length > 0 ? (
           filteredPosts.map((post) => (
@@ -158,7 +158,7 @@ export default function LiveIncidentStream({
               }`}
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
-                {/* User & Platform Metadata */}
+                {/* User & Location */}
                 <div className="flex items-center flex-wrap gap-2">
                   <span className="font-bold text-xs text-cyan-300 font-mono">
                     {post.username}
@@ -174,33 +174,26 @@ export default function LiveIncidentStream({
                   </span>
                 </div>
 
-                {/* Risk & Sentiment Badges */}
+                {/* Threat Badge */}
                 <div className="flex items-center gap-2">
                   <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded border ${
                     post.risk_level === 'High' ? 'bg-red-950 text-red-400 border-red-800' :
                     post.risk_level === 'Medium' ? 'bg-amber-950 text-amber-400 border-amber-800' :
                     'bg-emerald-950 text-emerald-400 border-emerald-800'
                   }`}>
-                    Risk: {post.risk_level}
-                  </span>
-                  <span className={`text-[10px] font-mono px-2 py-0.5 rounded ${
-                    post.sentiment === 'Negative' ? 'text-red-400 bg-red-950/40' :
-                    post.sentiment === 'Positive' ? 'text-emerald-400 bg-emerald-950/40' :
-                    'text-slate-400 bg-slate-800/40'
-                  }`}>
-                    {post.sentiment} ({post.sentiment_score})
+                    Threat: {post.risk_level}
                   </span>
                 </div>
               </div>
 
-              {/* Text Message Content */}
+              {/* Message Content */}
               <p className="text-sm text-slate-200 leading-relaxed font-sans pt-1">
                 {post.text}
               </p>
 
-              {/* Action Buttons & Metrics Bar */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mt-3 pt-2.5 border-t border-slate-800/80 text-xs font-mono">
-                <div className="flex items-center gap-4 text-slate-400">
+              {/* Action Buttons in Plain English */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mt-3 pt-2.5 border-t border-slate-800/80 text-xs font-sans">
+                <div className="flex items-center gap-4 text-slate-400 font-mono text-xs">
                   <span>❤️ {post.likes}</span>
                   <span>🔁 {post.retweets}</span>
                   <span className="text-[10px] text-slate-500">
@@ -208,14 +201,14 @@ export default function LiveIncidentStream({
                   </span>
                 </div>
 
-                {/* Quick Action Buttons */}
+                {/* Action Buttons */}
                 <div className="flex items-center gap-2 self-end sm:self-auto">
                   <button
                     onClick={() => onAnalyze(post)}
-                    className="px-3 py-1 rounded-lg bg-cyan-950 hover:bg-cyan-900 border border-cyan-500/50 text-cyan-300 transition flex items-center gap-1 text-[11px]"
+                    className="px-3 py-1 rounded-lg bg-cyan-950 hover:bg-cyan-900 border border-cyan-500/50 text-cyan-300 transition flex items-center gap-1 text-[11px] font-bold"
                   >
                     <Eye className="w-3 h-3 text-cyan-400" />
-                    Analyze
+                    Check Details
                   </button>
 
                   <button
@@ -227,26 +220,27 @@ export default function LiveIncidentStream({
                     }`}
                   >
                     <Flag className="w-3 h-3" />
-                    {post.is_flagged ? 'Quarantined' : 'Flag'}
+                    {post.is_flagged ? 'Flagged as Scam' : 'Flag Post'}
                   </button>
 
                   <button
                     onClick={() => {
                       navigator.clipboard.writeText(`[TECH NETRA ALERT] ${post.username} on ${post.platform}: "${post.text}" (Risk: ${post.risk_level})`);
-                      alert("Incident advisory copied to clipboard!");
+                      alert("Alert copied to clipboard!");
                     }}
                     className="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-300 transition text-[11px]"
-                    title="Copy Advisory"
+                    title="Copy Alert Message"
                   >
-                    Export
+                    <Copy className="w-3 h-3 inline mr-1" />
+                    Copy
                   </button>
                 </div>
               </div>
             </div>
           ))
         ) : (
-          <div className="text-center py-12 text-slate-500 font-mono text-xs border border-dashed border-slate-800 rounded-xl">
-            No incidents matched the selected filter query.
+          <div className="text-center py-12 text-slate-500 font-sans text-xs border border-dashed border-slate-800 rounded-xl">
+            No posts found matching your search.
           </div>
         )}
       </div>

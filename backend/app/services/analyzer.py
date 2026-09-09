@@ -4,27 +4,29 @@ from typing import Dict, Any, Tuple, List
 import random
 
 class ThreatAnalyzerService:
-    # --- NLP & Sentiment Analysis Constants ---
+    # --- NLP & Sentiment Analysis Keywords (Pure English) ---
     NEGATIVE_KEYWORDS = [
-        "scam", "fraud", "hacked", "fake", "protest", "chori", "dhokha", "alert", "danger",
-        "riots", "boycott", "leak", "arrest", "conspiracy", "khatra", "giraftaar", "urgent",
-        "warning", "banned", "illegal", "propaganda", "hoax", "deepfake", "bribe", "corrupt",
-        "attack", "crisis", "emergency", "cyberattack", "downtime", "shutdown", "blackout"
+        "scam", "fraud", "hacked", "fake", "protest", "theft", "cheat", "alert", "danger",
+        "riot", "boycott", "leak", "arrest", "conspiracy", "threat", "urgent", "warning",
+        "banned", "illegal", "propaganda", "hoax", "deepfake", "bribe", "corrupt", "attack",
+        "crisis", "emergency", "cyberattack", "downtime", "shutdown", "blackout", "phishing",
+        "stolen", "malware", "virus", "suspicious", "unauthorized", "freeze", "blocked"
     ]
     
     POSITIVE_KEYWORDS = [
         "success", "growth", "launch", "proud", "innovative", "safe", "verified", "achievement",
         "congratulations", "win", "improved", "secure", "relief", "development", "good", "great",
-        "progress", "shandaar", "badhai", "vikas"
+        "progress", "excellent", "safe", "milestone", "official", "resolved", "helpful"
     ]
     
     HIGH_RISK_TRIGGERS = [
-        "bank account frozen", "aadhaar kyc mandatory", "click link to claim", "urgent notice from rbi",
-        "riots started", "water supply poisoned", "curfew imposed immediately", "exam paper leaked",
-        "deepfake video viral", "free recharge 5g", "electricity disconnected tonight"
+        "bank account frozen", "kyc update mandatory", "click link to claim", "urgent notice from bank",
+        "urgent notice from rbi", "water supply poisoned", "curfew imposed immediately", "exam paper leaked",
+        "deepfake video viral", "free recharge offer", "electricity will be disconnected tonight",
+        "claim your reward money now", "police arrest warrant issued"
     ]
 
-    # --- Indian Region Geocodes Mapping ---
+    # --- Indian Region Coordinates Mapping ---
     REGION_COORDINATES = {
         "Delhi": (28.6139, 77.2090),
         "Maharashtra": (19.0760, 72.8777),
@@ -90,7 +92,7 @@ class ThreatAnalyzerService:
             "is_flagged": is_flagged
         }
 
-    # --- 2. Heuristic Bot & Astroturfing Detector ---
+    # --- 2. Heuristic Bot Detector ---
     @classmethod
     def analyze_bot_profile(
         cls,
@@ -102,65 +104,64 @@ class ThreatAnalyzerService:
     ) -> Dict[str, Any]:
         username_clean = username.strip()
         
-        # Fallbacks for on-the-fly demo scan inputs
         if followers is None:
-            followers = random.randint(5, 200) if "bot" in username_clean.lower() or "alert" in username_clean.lower() else random.randint(600, 15000)
+            followers = random.randint(5, 150) if "bot" in username_clean.lower() or "alert" in username_clean.lower() else random.randint(800, 12000)
         if following is None:
-            following = random.randint(2500, 6000) if "bot" in username_clean.lower() or "alert" in username_clean.lower() else random.randint(150, 800)
+            following = random.randint(2500, 5500) if "bot" in username_clean.lower() or "alert" in username_clean.lower() else random.randint(150, 700)
         if posts_per_hr is None:
-            posts_per_hr = round(random.uniform(25.0, 95.0), 1) if "bot" in username_clean.lower() else round(random.uniform(0.4, 4.0), 1)
+            posts_per_hr = round(random.uniform(35.0, 95.0), 1) if "bot" in username_clean.lower() else round(random.uniform(0.5, 3.5), 1)
         if account_age_days is None:
-            account_age_days = random.randint(1, 20) if "bot" in username_clean.lower() else random.randint(120, 1800)
+            account_age_days = random.randint(1, 15) if "bot" in username_clean.lower() else random.randint(150, 1800)
 
         bot_score = 0.0
         patterns: List[str] = []
 
-        # Heuristic 1: Follower to Following Ratio asymmetry
+        # Heuristic 1: Follower to Following ratio asymmetry
         ratio = followers / max(following, 1)
         if ratio < 0.05 and following > 1000:
             bot_score += 35.0
-            patterns.append("extreme follower-to-following asymmetry")
+            patterns.append("Follows too many users with zero followers")
 
-        # Heuristic 2: Post Cadence / Burst Frequency
+        # Heuristic 2: Post Frequency
         if posts_per_hr > 30.0:
             bot_score += 30.0
-            patterns.append(f"abnormal post cadence ({posts_per_hr} posts/hr)")
+            patterns.append(f"Unusually fast posting rate ({posts_per_hr} posts per hour)")
         elif posts_per_hr > 15.0:
             bot_score += 15.0
-            patterns.append("elevated posting frequency")
+            patterns.append("High posting frequency")
 
         # Heuristic 3: Account Age
         if account_age_days < 10:
             bot_score += 20.0
-            patterns.append("newly minted account (<10 days old)")
+            patterns.append("Brand new account (Created less than 10 days ago)")
         elif account_age_days < 30:
             bot_score += 10.0
-            patterns.append("young account (<30 days old)")
+            patterns.append("New account (Less than 30 days old)")
 
-        # Heuristic 4: Username synthetics (numbers suffix, bot keywords)
+        # Heuristic 4: Username pattern
         digits_count = sum(c.isdigit() for c in username_clean)
         if digits_count >= 4:
             bot_score += 15.0
-            patterns.append("algorithmic numerical suffix pattern")
-        if any(kw in username_clean.lower() for kw in ["bot", "cyber", "alert", "raid", "desi", "army", "anon", "trend"]):
+            patterns.append("Random computer-generated numbers in username")
+        if any(kw in username_clean.lower() for kw in ["bot", "cyber", "alert", "raid", "army", "anon", "trend"]):
             bot_score += 10.0
-            patterns.append("suspicious campaign keyword in handle")
+            patterns.append("Suspicious campaign keyword in handle")
 
         bot_probability = min(round(bot_score, 1), 99.4)
         is_flagged = bot_probability >= 60.0
 
         if not patterns:
-            patterns.append("standard organic user behavior")
+            patterns.append("Normal real user behavior")
 
         # Cluster assignment
         network_cluster = None
         if is_flagged:
             if "alert" in username_clean.lower() or "news" in username_clean.lower():
-                network_cluster = "Cluster-Disinfo-EchoNet"
+                network_cluster = "Fake News Bot Cluster #1"
             elif "scam" in username_clean.lower() or "free" in username_clean.lower() or "claim" in username_clean.lower():
-                network_cluster = "Cluster-Phish-Syndicate"
+                network_cluster = "Phishing & Fraud Bot Cluster #2"
             else:
-                network_cluster = "Cluster-Astroturf-Alpha"
+                network_cluster = "Automated Spam Bot Cluster #3"
 
         return {
             "username": username_clean if username_clean.startswith("@") else f"@{username_clean}",
@@ -191,38 +192,32 @@ class ThreatAnalyzerService:
         score = 5.0
         threat_type = "Clean"
 
-        # Check IP based address
         if re.match(r"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$", domain):
             score += 45.0
-            risk_factors.append("Direct IP address host without valid FQDN")
+            risk_factors.append("Direct IP address used instead of real domain name")
 
-        # Check Suspicious TLDs
         for tld in suspicious_tlds:
             if domain_lower.endswith(tld):
                 score += 30.0
-                risk_factors.append(f"High-risk top-level domain ({tld})")
+                risk_factors.append(f"High-risk untrusted domain extension ({tld})")
                 break
 
-        # Check Phishing Keywords in domain/path
         matched_kws = [kw for kw in phish_keywords if kw in full_url_lower]
         if matched_kws:
             score += min(len(matched_kws) * 20.0, 40.0)
-            risk_factors.append(f"Detected sensitive brand/credential keywords: {', '.join(matched_kws)}")
+            risk_factors.append(f"Fake bank/credential keywords found: {', '.join(matched_kws)}")
 
-        # Check Brand Spoofing / Punycode / Hyphen stuffing
         if domain_lower.count("-") >= 2:
             score += 20.0
-            risk_factors.append("Multi-hyphen brand spoofing pattern")
+            risk_factors.append("Fake brand name with multiple hyphens")
 
-        # Check Malware download triggers
         if any(full_url_lower.endswith(ext) for ext in malware_extensions):
             score += 50.0
-            risk_factors.append("Direct executable / malware payload extension detected")
+            risk_factors.append("Direct malware / suspicious app (.APK/.EXE) download file")
 
-        # Determine final status
         confidence_score = min(round(score, 1), 99.8)
 
-        if any("executable" in rf or ".apk" in full_url_lower for rf in risk_factors):
+        if any("malware" in rf or ".apk" in full_url_lower for rf in risk_factors):
             threat_type = "Malware"
         elif confidence_score >= 60.0:
             threat_type = "Phishing"
@@ -231,7 +226,7 @@ class ThreatAnalyzerService:
         else:
             threat_type = "Clean"
             if not risk_factors:
-                risk_factors.append("Standard legitimate domain telemetry & valid SSL profile")
+                risk_factors.append("Legitimate verified website with secure SSL certificate")
 
         redirect_count = random.randint(2, 4) if threat_type != "Clean" else 0
 

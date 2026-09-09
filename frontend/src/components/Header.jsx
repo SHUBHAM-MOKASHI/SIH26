@@ -4,11 +4,9 @@ import {
   Radio, 
   Bell, 
   RefreshCw, 
-  Activity, 
   ShieldCheck, 
   Clock, 
   FileText,
-  Sparkles,
   AlertTriangle,
   X
 } from 'lucide-react';
@@ -37,17 +35,17 @@ export default function Header({ onRefresh, loading, onOpenReportModal, notifica
   }, []);
 
   const defaultNotifications = [
-    { id: 1, title: 'Disinformation Flare', desc: 'Coordinated bot surge detected on #BankingScam in Mumbai', time: '2m ago', severity: 'Critical' },
-    { id: 2, title: 'Malicious Phishing APK', desc: 'Direct download APK link detected targeting SBI users', time: '8m ago', severity: 'High' },
-    { id: 3, title: 'Synthetic Voice Leak', desc: 'Deepfake audio detected impersonating state minister', time: '18m ago', severity: 'High' },
-    { id: 4, title: 'Astroturfing Spike', desc: '5 bot accounts banned in #BoycottECommerce network', time: '32m ago', severity: 'Medium' }
+    { id: 1, title: 'Fake Banking Scam Alert', desc: 'Multiple fake bank SMS messages reported in Mumbai asking users to update PAN card.', time: '2m ago', severity: 'Critical' },
+    { id: 2, title: 'Dangerous Phishing Link', desc: 'Fake SBI APK download link detected in WhatsApp & Telegram groups.', time: '8m ago', severity: 'High' },
+    { id: 3, title: 'AI Voice Clone Warning', desc: 'Fake deepfake voice audio pretending to be an official minister was flagged.', time: '18m ago', severity: 'High' },
+    { id: 4, title: 'Automated Bot Network', desc: '5 fake bot accounts found repeating the same spam messages.', time: '32m ago', severity: 'Medium' }
   ];
 
   const activeAlerts = notifications.length > 0 ? notifications : defaultNotifications;
 
   return (
     <header className="border-b border-cyan-500/20 bg-[#0c1427]/90 backdrop-blur-md sticky top-0 z-40 px-6 py-3.5 flex flex-col md:flex-row md:items-center justify-between gap-4">
-      {/* Brand & Operation Title */}
+      {/* Brand & Platform Title */}
       <div className="flex items-center gap-3">
         <div className="relative flex items-center justify-center w-11 h-11 rounded-xl bg-gradient-to-br from-cyan-950 to-blue-950 border border-cyan-500/40 text-cyan-400 shadow-lg shadow-cyan-950/60">
           <ShieldAlert className="w-6 h-6 animate-pulse text-cyan-400" />
@@ -63,19 +61,19 @@ export default function Header({ onRefresh, loading, onOpenReportModal, notifica
             </h1>
             <span className="text-slate-500 font-light">|</span>
             <span className="text-sm font-semibold tracking-wide text-slate-300">
-              Intelligence Operations
+              National Cyber Safety & Misinformation Radar
             </span>
             <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-cyan-950 text-cyan-400 border border-cyan-700/60">
-              DEFCON 2
+              Active Protection
             </span>
           </div>
-          <div className="flex items-center gap-3 text-xs text-slate-400 font-mono mt-0.5">
+          <div className="flex items-center gap-3 text-xs text-slate-400 font-sans mt-0.5">
             <span className="flex items-center gap-1.5 text-emerald-400">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-              Monitoring 6 Networks Active (X, TG, IG, YT, WA, Reddit)
+              Live Monitoring: X, Telegram, Instagram, YouTube, WhatsApp
             </span>
             <span className="text-slate-600">•</span>
-            <span className="flex items-center gap-1 text-slate-400">
+            <span className="flex items-center gap-1 text-slate-400 font-mono">
               <Clock className="w-3.5 h-3.5 text-cyan-400" />
               {currentTime}
             </span>
@@ -83,30 +81,30 @@ export default function Header({ onRefresh, loading, onOpenReportModal, notifica
         </div>
       </div>
 
-      {/* Right Controls, Generate Brief, and Notifications */}
+      {/* Right Controls in Easy English */}
       <div className="flex items-center gap-3 self-end md:self-auto">
-        {/* Generate Intelligence Brief Button */}
+        {/* Create Safety Report Button */}
         <button
           onClick={onOpenReportModal}
-          className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-gradient-to-r from-cyan-600 via-sky-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 text-white font-mono text-xs font-bold transition shadow-lg shadow-cyan-950/60 border border-cyan-400/40 hover:scale-105 active:scale-95"
-          title="Compile and Generate Intelligence Dossier"
+          className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-gradient-to-r from-cyan-600 via-sky-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 text-white font-sans text-xs font-bold transition shadow-lg shadow-cyan-950/60 border border-cyan-400/40 hover:scale-105 active:scale-95"
+          title="Create a printable summary report of all current safety alerts"
         >
           <FileText className="w-3.5 h-3.5" />
-          <span>Generate Intelligence Brief</span>
+          <span>Create Safety Report</span>
         </button>
 
-        {/* Sync Feed Button */}
+        {/* Refresh Data Button */}
         <button
           onClick={onRefresh}
           disabled={loading}
-          className="flex items-center gap-2 px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 hover:border-cyan-500/60 text-slate-200 hover:text-cyan-300 transition text-xs font-mono disabled:opacity-50"
-          title="Sync Realtime Social Telemetry"
+          className="flex items-center gap-2 px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 hover:border-cyan-500/60 text-slate-200 hover:text-cyan-300 transition text-xs font-sans disabled:opacity-50 font-medium"
+          title="Refresh live posts and alerts"
         >
           <RefreshCw className={`w-3.5 h-3.5 text-cyan-400 ${loading ? 'animate-spin' : ''}`} />
-          <span>{loading ? 'SYNCING...' : 'LIVE SYNC'}</span>
+          <span>{loading ? 'Refreshing...' : 'Refresh Data'}</span>
         </button>
 
-        {/* Notifications Dropdown Container */}
+        {/* Recent Alerts Dropdown */}
         <div className="relative">
           <button
             onClick={() => {
@@ -114,7 +112,7 @@ export default function Header({ onRefresh, loading, onOpenReportModal, notifica
               setUnreadCount(0);
             }}
             className="relative p-2.5 rounded-xl bg-slate-900 border border-slate-700 hover:border-cyan-500/60 text-slate-300 hover:text-cyan-300 transition"
-            title="Incident Notifications"
+            title="View Recent Alerts"
           >
             <Bell className="w-4 h-4" />
             {unreadCount > 0 && (
@@ -130,7 +128,7 @@ export default function Header({ onRefresh, loading, onOpenReportModal, notifica
               <div className="flex items-center justify-between border-b border-slate-800 pb-2.5">
                 <div className="flex items-center gap-2 font-semibold text-sm text-white">
                   <AlertTriangle className="w-4 h-4 text-amber-400" />
-                  <span>Real-time Incident Alerts</span>
+                  <span>Recent Safety Alerts</span>
                 </div>
                 <button
                   onClick={() => setShowNotifications(false)}
@@ -147,7 +145,7 @@ export default function Header({ onRefresh, loading, onOpenReportModal, notifica
                     className="p-3 rounded-xl bg-slate-900/90 border border-slate-800/80 hover:border-cyan-500/40 transition space-y-1"
                   >
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold text-cyan-300 font-mono">{alert.title}</span>
+                      <span className="text-xs font-bold text-cyan-300">{alert.title}</span>
                       <span className={`text-[10px] font-mono px-2 py-0.5 rounded font-bold ${
                         alert.severity === 'Critical' ? 'bg-red-950 text-red-400 border border-red-800' :
                         alert.severity === 'High' ? 'bg-amber-950 text-amber-400 border border-amber-800' :

@@ -9,12 +9,8 @@ import {
   Link2, 
   CheckCircle2, 
   AlertTriangle, 
-  Radio, 
   Sparkles,
-  Share2,
-  Lock,
-  ExternalLink,
-  ChevronDown
+  Share2
 } from 'lucide-react';
 
 import { apiUrl } from '../services/api';
@@ -32,7 +28,7 @@ export default function ReportDossierModal({ isOpen, onClose, initialTopic = '' 
       const data = await res.json();
       setDossier(data);
     } catch (err) {
-      console.error("Failed generating dossier:", err);
+      console.error("Failed generating report:", err);
     } finally {
       setLoading(false);
     }
@@ -56,17 +52,17 @@ export default function ReportDossierModal({ isOpen, onClose, initialTopic = '' 
       <div className="bg-[#0c1427] border border-cyan-500/40 rounded-2xl w-full max-w-4xl max-h-[92vh] flex flex-col shadow-2xl overflow-hidden print:max-w-none print:max-h-none print:border-none print:shadow-none print:rounded-none print:bg-white print:text-black">
         
         {/* Top Operational Action Bar (Hidden on Print) */}
-        <div className="p-4 bg-slate-900/90 border-b border-slate-800 flex flex-wrap items-center justify-between gap-3 print:hidden">
+        <div className="p-4 bg-slate-900/90 border-b border-slate-800 flex flex-wrap items-center justify-between gap-3 print:hidden font-sans">
           <div className="flex items-center gap-2">
             <div className="p-2 rounded-xl bg-cyan-950 border border-cyan-500/50 text-cyan-400">
               <FileText className="w-5 h-5 animate-pulse" />
             </div>
             <div>
-              <h3 className="font-bold text-sm text-white font-mono flex items-center gap-2">
-                Tech Netra | Intelligence Dossier Compiler
+              <h3 className="font-bold text-sm text-white flex items-center gap-2">
+                Tech Netra | Safety Summary Report
               </h3>
-              <p className="text-[11px] text-slate-400 font-mono">
-                Automated threat synthesis & law enforcement briefing generator
+              <p className="text-[11px] text-slate-400">
+                Automated summary of fake news, scams, and recommended public safety steps.
               </p>
             </div>
           </div>
@@ -74,27 +70,27 @@ export default function ReportDossierModal({ isOpen, onClose, initialTopic = '' 
           {/* Quick Topic Filter & Print Button */}
           <div className="flex items-center gap-2">
             <div className="flex items-center gap-1.5 bg-slate-950 border border-slate-700 rounded-xl px-2.5 py-1">
-              <span className="text-[11px] font-mono text-slate-400">Focus Topic:</span>
+              <span className="text-[11px] text-slate-400">Filter Topic:</span>
               <select
                 value={topic}
                 onChange={(e) => {
                   setTopic(e.target.value);
                   fetchDossier(e.target.value);
                 }}
-                className="bg-transparent text-xs font-mono text-cyan-300 outline-none cursor-pointer"
+                className="bg-transparent text-xs text-cyan-300 outline-none cursor-pointer"
               >
                 <option value="" className="bg-slate-900 text-white">All Monitored Threats</option>
-                <option value="#BankingScam" className="bg-slate-900 text-white">#BankingScam (KYC/UPI Fraud)</option>
-                <option value="#DeepfakeAlert" className="bg-slate-900 text-white">#DeepfakeAlert (Synthetic Media)</option>
-                <option value="#UPSCProtest" className="bg-slate-900 text-white">#UPSCProtest (Civil Unrest)</option>
-                <option value="#BoycottECommerce" className="bg-slate-900 text-white">#BoycottECommerce (Astroturf)</option>
+                <option value="#BankingScam" className="bg-slate-900 text-white">#BankingScam (Fake Bank Messages)</option>
+                <option value="#DeepfakeAlert" className="bg-slate-900 text-white">#DeepfakeAlert (AI Fake Audio/Video)</option>
+                <option value="#UPSCProtest" className="bg-slate-900 text-white">#UPSCProtest (Student Rallies)</option>
+                <option value="#BoycottOnlineRetailers" className="bg-slate-900 text-white">#BoycottOnlineRetailers (Spam)</option>
               </select>
             </div>
 
             <button
               onClick={handlePrint}
               disabled={loading || !dossier}
-              className="px-3.5 py-1.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-mono font-bold flex items-center gap-1.5 transition shadow-lg shadow-cyan-950 disabled:opacity-50"
+              className="px-3.5 py-1.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-bold flex items-center gap-1.5 transition shadow-lg shadow-cyan-950 disabled:opacity-50"
             >
               <Printer className="w-3.5 h-3.5" />
               Print / Save PDF
@@ -109,40 +105,40 @@ export default function ReportDossierModal({ isOpen, onClose, initialTopic = '' 
           </div>
         </div>
 
-        {/* Scrollable Printable Dossier Content */}
+        {/* Scrollable Printable Report Content */}
         <div className="p-6 sm:p-8 space-y-6 overflow-y-auto flex-1 font-sans print:p-0 print:overflow-visible">
           {loading ? (
-            <div className="py-24 text-center space-y-3 font-mono">
+            <div className="py-24 text-center space-y-3 font-sans">
               <Sparkles className="w-8 h-8 text-cyan-400 animate-spin mx-auto" />
-              <p className="text-sm text-cyan-300">Synthesizing threat intelligence vectors & bot clusters...</p>
+              <p className="text-sm text-cyan-300">Compiling safety summary and fake account findings...</p>
             </div>
           ) : dossier ? (
             <div className="space-y-6 print:text-black">
-              {/* Classification Top Header Banner */}
-              <div className="bg-slate-900 border border-cyan-500/30 text-cyan-400 text-center py-2 font-mono text-[11px] font-bold tracking-widest uppercase rounded-lg print:bg-slate-100 print:text-black print:border-black">
-                {dossier.classification_banner}
+              {/* Top Classification Header */}
+              <div className="bg-slate-900 border border-cyan-500/30 text-cyan-400 text-center py-2 text-[11px] font-bold tracking-widest uppercase rounded-lg print:bg-slate-100 print:text-black print:border-black font-mono">
+                {dossier.classification_banner || 'OFFICIAL CYBER SAFETY ADVISORY // TECH NETRA'}
               </div>
 
-              {/* Dossier Header Info */}
+              {/* Header Info */}
               <div className="border-b-2 border-cyan-500/40 pb-4 flex flex-col sm:flex-row sm:items-end justify-between gap-4 print:border-black">
                 <div>
-                  <div className="text-xs font-mono text-cyan-400 tracking-wider font-bold print:text-slate-700">
-                    GOVERNMENT OF INDIA // TECH NETRA INTELLIGENCE SOC
+                  <div className="text-xs text-cyan-400 tracking-wider font-bold print:text-slate-700">
+                    NATIONAL CYBER INCIDENT SUMMARY
                   </div>
                   <h1 className="text-2xl font-black text-white mt-1 print:text-black">
                     {dossier.title}
                   </h1>
-                  <div className="text-xs font-mono text-slate-400 mt-1 flex flex-wrap items-center gap-3 print:text-slate-600">
+                  <div className="text-xs text-slate-400 mt-1 flex flex-wrap items-center gap-3 print:text-slate-600 font-mono">
                     <span>REF: <strong>{dossier.reference_id}</strong></span>
                     <span>•</span>
                     <span>GENERATED: {new Date(dossier.generated_at).toUTCString()}</span>
                     <span>•</span>
-                    <span>TOPIC VECTOR: <strong>{dossier.topic}</strong></span>
+                    <span>MAIN TOPIC: <strong>{dossier.topic}</strong></span>
                   </div>
                 </div>
 
                 <div className="text-right">
-                  <span className={`inline-block px-3 py-1 rounded-md font-mono text-xs font-extrabold tracking-wider ${
+                  <span className={`inline-block px-3 py-1 rounded-md text-xs font-extrabold tracking-wider ${
                     dossier.threat_level === 'CRITICAL' ? 'bg-red-950 text-red-400 border border-red-800 print:bg-red-100 print:text-red-800' :
                     dossier.threat_level === 'HIGH' ? 'bg-amber-950 text-amber-400 border border-amber-800 print:bg-amber-100 print:text-amber-800' :
                     'bg-blue-950 text-blue-400 border border-blue-800'
@@ -154,57 +150,57 @@ export default function ReportDossierModal({ isOpen, onClose, initialTopic = '' 
 
               {/* Section 1: Executive Summary & Reach Metrics */}
               <div className="space-y-3">
-                <h2 className="text-sm font-bold font-mono uppercase tracking-wider text-cyan-400 border-b border-slate-800 pb-1 flex items-center gap-2 print:text-black print:border-black">
-                  1. Narrative Executive Summary & Incident Scope
+                <h2 className="text-sm font-bold uppercase tracking-wider text-cyan-400 border-b border-slate-800 pb-1 flex items-center gap-2 print:text-black print:border-black font-sans">
+                  1. Executive Summary & Rumor Spread
                 </h2>
-                <p className="text-sm text-slate-200 leading-relaxed print:text-slate-900">
+                <p className="text-sm text-slate-200 leading-relaxed print:text-slate-900 font-sans">
                   {dossier.executive_summary}
                 </p>
 
-                {/* KPI Overview Strip */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 font-mono">
+                {/* KPI Strip */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 font-sans">
                   <div className="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800 print:bg-slate-50 print:border-slate-300">
-                    <span className="text-[11px] text-slate-400 block">Inspected Posts</span>
-                    <span className="text-lg font-bold text-white print:text-black">{dossier.total_posts_analyzed}</span>
+                    <span className="text-[11px] text-slate-400 block">Total Messages Scanned</span>
+                    <span className="text-lg font-bold text-white font-mono print:text-black">{dossier.total_posts_analyzed}</span>
                   </div>
 
                   <div className="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800 print:bg-slate-50 print:border-slate-300">
-                    <span className="text-[11px] text-slate-400 block">Estimated Social Reach</span>
-                    <span className="text-lg font-bold text-cyan-300 print:text-blue-700">{dossier.estimated_reach.toLocaleString()} impressions</span>
+                    <span className="text-[11px] text-slate-400 block">Estimated Audience Reach</span>
+                    <span className="text-lg font-bold text-cyan-300 font-mono print:text-blue-700">{dossier.estimated_reach.toLocaleString()} people</span>
                   </div>
 
                   <div className="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800 print:bg-slate-50 print:border-slate-300">
-                    <span className="text-[11px] text-slate-400 block">Negative / Hostile Polarity</span>
-                    <span className="text-lg font-bold text-red-400 print:text-red-700">{dossier.sentiment_polarity.negative_pct}%</span>
+                    <span className="text-[11px] text-slate-400 block">Panic / Hostile Sentiment</span>
+                    <span className="text-lg font-bold text-red-400 font-mono print:text-red-700">{dossier.sentiment_polarity.negative_pct}%</span>
                   </div>
                 </div>
               </div>
 
-              {/* Section 2: Coordinated Bot Clusters */}
+              {/* Section 2: Fake Bot Accounts */}
               <div className="space-y-3">
-                <h2 className="text-sm font-bold font-mono uppercase tracking-wider text-indigo-400 border-b border-slate-800 pb-1 flex items-center gap-2 print:text-black print:border-black">
-                  2. Identified Coordinated Bot Clusters & Astroturfing Nodes
+                <h2 className="text-sm font-bold uppercase tracking-wider text-indigo-400 border-b border-slate-800 pb-1 flex items-center gap-2 print:text-black print:border-black font-sans">
+                  2. Detected Fake Accounts & Spam Networks
                 </h2>
                 
                 <div className="overflow-x-auto">
-                  <table className="w-full text-left font-mono text-xs border border-slate-800 rounded-xl overflow-hidden print:border-black">
+                  <table className="w-full text-left text-xs border border-slate-800 rounded-xl overflow-hidden print:border-black font-sans">
                     <thead className="bg-slate-900 text-slate-300 print:bg-slate-100 print:text-black">
                       <tr className="border-b border-slate-800 print:border-black">
-                        <th className="p-2.5">Cluster ID</th>
-                        <th className="p-2.5">Estimated Nodes</th>
-                        <th className="p-2.5">Avg Bot Score</th>
-                        <th className="p-2.5">Coordination Vector</th>
-                        <th className="p-2.5">Sample Handles</th>
+                        <th className="p-2.5">Spam Group</th>
+                        <th className="p-2.5">Fake Accounts</th>
+                        <th className="p-2.5">Bot Score</th>
+                        <th className="p-2.5">Behavior Type</th>
+                        <th className="p-2.5">Sample Usernames</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-slate-800 print:divide-slate-300">
+                    <tbody className="divide-y divide-slate-800 print:divide-slate-300 font-sans">
                       {dossier.top_bot_clusters.map((c) => (
                         <tr key={c.cluster_id} className="bg-slate-900/40 print:bg-white">
-                          <td className="p-2.5 font-bold text-cyan-300 print:text-black">{c.cluster_id}</td>
-                          <td className="p-2.5">{c.node_count} nodes</td>
-                          <td className="p-2.5 text-red-400 font-bold print:text-red-700">{c.avg_bot_score}%</td>
-                          <td className="p-2.5 text-slate-300 print:text-slate-800 font-sans">{c.coordination_type}</td>
-                          <td className="p-2.5 text-indigo-300 print:text-indigo-800">{c.sample_handles.join(', ')}</td>
+                          <td className="p-2.5 font-bold text-cyan-300 print:text-black font-mono">{c.cluster_id}</td>
+                          <td className="p-2.5 font-mono">{c.node_count} bots</td>
+                          <td className="p-2.5 text-red-400 font-bold font-mono print:text-red-700">{c.avg_bot_score}%</td>
+                          <td className="p-2.5 text-slate-300 print:text-slate-800">{c.coordination_type}</td>
+                          <td className="p-2.5 text-indigo-300 print:text-indigo-800 font-mono">{c.sample_handles.join(', ')}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -212,31 +208,31 @@ export default function ReportDossierModal({ isOpen, onClose, initialTopic = '' 
                 </div>
               </div>
 
-              {/* Section 3: Flagged Deceptive Links */}
+              {/* Section 3: Blocked Phishing Links */}
               <div className="space-y-3">
-                <h2 className="text-sm font-bold font-mono uppercase tracking-wider text-amber-400 border-b border-slate-800 pb-1 flex items-center gap-2 print:text-black print:border-black">
-                  3. Flagged Deceptive Links & Phishing Infrastructure
+                <h2 className="text-sm font-bold uppercase tracking-wider text-amber-400 border-b border-slate-800 pb-1 flex items-center gap-2 print:text-black print:border-black font-sans">
+                  3. Blocked Phishing Links & Fake Websites
                 </h2>
 
                 <div className="overflow-x-auto">
-                  <table className="w-full text-left font-mono text-xs border border-slate-800 rounded-xl overflow-hidden print:border-black">
+                  <table className="w-full text-left text-xs border border-slate-800 rounded-xl overflow-hidden print:border-black font-sans">
                     <thead className="bg-slate-900 text-slate-300 print:bg-slate-100 print:text-black">
                       <tr className="border-b border-slate-800 print:border-black">
-                        <th className="p-2.5">Target URL</th>
+                        <th className="p-2.5">Target Web Link</th>
                         <th className="p-2.5">Domain</th>
-                        <th className="p-2.5">Threat Verdict</th>
+                        <th className="p-2.5">Safety Verdict</th>
                         <th className="p-2.5">Confidence</th>
-                        <th className="p-2.5">Triggered Risk Indicators</th>
+                        <th className="p-2.5">Why Flagged?</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-slate-800 print:divide-slate-300">
+                    <tbody className="divide-y divide-slate-800 print:divide-slate-300 font-sans">
                       {dossier.deceptive_links.map((link, idx) => (
                         <tr key={idx} className="bg-slate-900/40 print:bg-white">
                           <td className="p-2.5 font-mono text-slate-200 truncate max-w-[200px] print:text-black">{link.url}</td>
-                          <td className="p-2.5 font-bold text-white print:text-black">{link.domain}</td>
+                          <td className="p-2.5 font-bold text-white print:text-black font-mono">{link.domain}</td>
                           <td className="p-2.5 font-bold text-red-400 print:text-red-700">{link.threat_type}</td>
-                          <td className="p-2.5">{link.confidence_score}%</td>
-                          <td className="p-2.5 text-slate-300 print:text-slate-800 font-sans">{link.risk_factors}</td>
+                          <td className="p-2.5 font-mono">{link.confidence_score}%</td>
+                          <td className="p-2.5 text-slate-300 print:text-slate-800">{link.risk_factors}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -244,25 +240,25 @@ export default function ReportDossierModal({ isOpen, onClose, initialTopic = '' 
                 </div>
               </div>
 
-              {/* Section 4: Actionable Countermeasures */}
+              {/* Section 4: Recommended Safety Steps */}
               <div className="space-y-3">
-                <h2 className="text-sm font-bold font-mono uppercase tracking-wider text-emerald-400 border-b border-slate-800 pb-1 flex items-center gap-2 print:text-black print:border-black">
-                  4. Actionable Directives for Law Enforcement & SOC Countermeasures
+                <h2 className="text-sm font-bold uppercase tracking-wider text-emerald-400 border-b border-slate-800 pb-1 flex items-center gap-2 print:text-black print:border-black font-sans">
+                  4. Recommended Public Safety & Countermeasure Steps
                 </h2>
 
-                <div className="p-4 rounded-xl bg-emerald-950/30 border border-emerald-500/40 space-y-2 text-xs font-mono print:bg-emerald-50 print:border-emerald-700">
+                <div className="p-4 rounded-xl bg-emerald-950/30 border border-emerald-500/40 space-y-2 text-xs font-sans print:bg-emerald-50 print:border-emerald-700">
                   {dossier.actionable_countermeasures.map((item, idx) => (
-                    <div key={idx} className="text-slate-200 leading-relaxed font-sans print:text-black">
-                      {item}
+                    <div key={idx} className="text-slate-200 leading-relaxed print:text-black">
+                      • {item}
                     </div>
                   ))}
                 </div>
               </div>
 
-              {/* Security Seal & Watermark */}
-              <div className="pt-6 border-t border-slate-800 flex items-center justify-between text-[11px] font-mono text-slate-500 print:border-black print:text-black">
-                <span>TECH NETRA AI OPS // FOR INTERNAL LEA & SOC DISSEMINATION ONLY</span>
-                <span>AUTHENTICATED DIGITAL BRIEF</span>
+              {/* Footer */}
+              <div className="pt-6 border-t border-slate-800 flex items-center justify-between text-[11px] text-slate-500 print:border-black print:text-black font-mono">
+                <span>TECH NETRA // NATIONAL CYBER SAFETY ADVISORY</span>
+                <span>AUTHENTICATED DIGITAL REPORT</span>
               </div>
             </div>
           ) : null}
