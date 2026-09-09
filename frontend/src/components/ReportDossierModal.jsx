@@ -17,6 +17,8 @@ import {
   ChevronDown
 } from 'lucide-react';
 
+import { apiUrl } from '../services/api';
+
 export default function ReportDossierModal({ isOpen, onClose, initialTopic = '' }) {
   const [topic, setTopic] = useState(initialTopic);
   const [dossier, setDossier] = useState(null);
@@ -26,7 +28,7 @@ export default function ReportDossierModal({ isOpen, onClose, initialTopic = '' 
     setLoading(true);
     try {
       const queryParam = targetTopic ? `?topic=${encodeURIComponent(targetTopic)}` : '';
-      const res = await fetch(`/api/reports/generate${queryParam}`);
+      const res = await fetch(apiUrl(`/api/reports/generate${queryParam}`));
       const data = await res.json();
       setDossier(data);
     } catch (err) {

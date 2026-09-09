@@ -19,6 +19,8 @@ import {
   Radio
 } from 'lucide-react';
 
+import { apiUrl } from '../services/api';
+
 export default function LinkAnalyzerView({ onRefresh }) {
   const [links, setLinks] = useState([]);
   const [linkStats, setLinkStats] = useState(null);
@@ -33,8 +35,8 @@ export default function LinkAnalyzerView({ onRefresh }) {
     setLoading(true);
     try {
       const [linksRes, statsRes] = await Promise.allSettled([
-        fetch('/api/links?limit=50').then(r => r.json()),
-        fetch('/api/links/stats').then(r => r.json())
+        fetch(apiUrl('/api/links?limit=50')).then(r => r.json()),
+        fetch(apiUrl('/api/links/stats')).then(r => r.json())
       ]);
 
       if (linksRes.status === 'fulfilled') setLinks(linksRes.value);
@@ -55,7 +57,7 @@ export default function LinkAnalyzerView({ onRefresh }) {
     if (!target) return;
     setScanning(true);
     try {
-      const res = await fetch('/api/links/scan', {
+      const res = await fetch(apiUrl('/api/links/scan'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ url: target })

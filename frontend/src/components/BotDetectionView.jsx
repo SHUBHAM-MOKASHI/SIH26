@@ -19,6 +19,8 @@ import {
   Share2
 } from 'lucide-react';
 
+import { apiUrl } from '../services/api';
+
 export default function BotDetectionView({ onRefresh }) {
   const [bots, setBots] = useState([]);
   const [botStats, setBotStats] = useState(null);
@@ -41,8 +43,8 @@ export default function BotDetectionView({ onRefresh }) {
     setLoading(true);
     try {
       const [botsRes, statsRes] = await Promise.allSettled([
-        fetch('/api/bots?limit=100').then(r => r.json()),
-        fetch('/api/bots/stats').then(r => r.json())
+        fetch(apiUrl('/api/bots?limit=100')).then(r => r.json()),
+        fetch(apiUrl('/api/bots/stats')).then(r => r.json())
       ]);
 
       if (botsRes.status === 'fulfilled') setBots(botsRes.value);
@@ -63,7 +65,7 @@ export default function BotDetectionView({ onRefresh }) {
     if (!scanUsername) return;
     setScanning(true);
     try {
-      const res = await fetch('/api/bots/scan', {
+      const res = await fetch(apiUrl('/api/bots/scan'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username: scanUsername })

@@ -8,6 +8,7 @@ import AnalysisModal from './components/AnalysisModal';
 import BotDetectionView from './components/BotDetectionView';
 import LinkAnalyzerView from './components/LinkAnalyzerView';
 import ReportDossierModal from './components/ReportDossierModal';
+import { apiUrl } from './services/api';
 import { Bot, Link2, FileText, LayoutDashboard, Sparkles, Printer, ExternalLink } from 'lucide-react';
 
 export default function App() {
@@ -37,12 +38,12 @@ export default function App() {
     setLoading(true);
     try {
       const [analyticsRes, postsRes, heatmapRes, botRes, linkRes, reportsRes] = await Promise.allSettled([
-        fetch('/api/trends/analytics').then(r => r.json()),
-        fetch('/api/posts?limit=100').then(r => r.json()),
-        fetch('/api/trends/heatmap').then(r => r.json()),
-        fetch('/api/bots/stats').then(r => r.json()),
-        fetch('/api/links/stats').then(r => r.json()),
-        fetch('/api/reports').then(r => r.json())
+        fetch(apiUrl('/api/trends/analytics')).then(r => r.json()),
+        fetch(apiUrl('/api/posts?limit=100')).then(r => r.json()),
+        fetch(apiUrl('/api/trends/heatmap')).then(r => r.json()),
+        fetch(apiUrl('/api/bots/stats')).then(r => r.json()),
+        fetch(apiUrl('/api/links/stats')).then(r => r.json()),
+        fetch(apiUrl('/api/reports')).then(r => r.json())
       ]);
 
       if (analyticsRes.status === 'fulfilled') setAnalytics(analyticsRes.value);
