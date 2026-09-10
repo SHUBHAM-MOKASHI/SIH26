@@ -295,11 +295,13 @@ export default function App() {
       <footer className="bg-[#12355B] text-slate-300 border-t border-slate-700 mt-12 py-8 px-6">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-white/10 text-white">
-              <Shield className="w-5 h-5 text-[#19B5E6]" />
-            </div>
+            <img 
+              src="/logo.png" 
+              alt="Tech Netra Logo" 
+              className="w-10 h-10 rounded-full object-cover bg-white p-0.5 border border-[#19B5E6]/40 shadow-sm" 
+            />
             <div>
-              <div className="font-bold text-white text-sm">TECH NETRA CYBER RADAR</div>
+              <div className="font-bold text-white text-sm tracking-wide">TECH NETRA CYBER RADAR</div>
               <div className="text-xs text-slate-400">National Cyber Safety & Misinformation Threat Intelligence</div>
             </div>
           </div>

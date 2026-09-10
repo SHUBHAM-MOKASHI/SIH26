@@ -47,9 +47,13 @@ export default function Header({ onRefresh, loading, onOpenReportModal, notifica
     <header className="border-b border-slate-200 bg-white/95 backdrop-blur-md sticky top-0 z-40 px-6 py-3.5 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-sm">
       {/* Brand & Platform Title */}
       <div className="flex items-center gap-3">
-        <div className="relative flex items-center justify-center w-11 h-11 rounded-xl bg-gradient-to-br from-[#1769AA] to-[#12355B] text-white shadow-sm shadow-[#1769AA]/20">
-          <ShieldAlert className="w-5 h-5 animate-pulse text-white" />
-          <span className="absolute -top-1 -right-1 flex h-3 w-3">
+        <div className="relative flex items-center justify-center">
+          <img 
+            src="/logo.png" 
+            alt="Tech Netra Logo" 
+            className="w-11 h-11 rounded-full object-cover border-2 border-[#1769AA]/30 shadow-sm shadow-[#1769AA]/20 bg-white p-0.5 hover:scale-105 transition-transform" 
+          />
+          <span className="absolute -top-0.5 -right-0.5 flex h-3 w-3">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
           </span>
@@ -71,7 +75,7 @@ export default function Header({ onRefresh, loading, onOpenReportModal, notifica
           <div className="flex items-center gap-3 text-xs text-[#4A607A] font-sans mt-0.5">
             <span className="flex items-center gap-1.5 text-[#12355B] font-medium">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              Live Monitoring: X, Telegram, Instagram, YouTube, WhatsApp
+              Live Monitoring: X, Telegram, Instagram, YouTube
             </span>
             <span className="text-slate-300">•</span>
             <span className="flex items-center gap-1 text-[#4A607A] font-mono">
