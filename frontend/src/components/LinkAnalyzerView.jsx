@@ -122,11 +122,11 @@ export default function LinkAnalyzerView({ onRefresh }) {
   return (
     <div className="space-y-6">
       {/* 1. Header & Scanner Input */}
-      <div className="p-6 rounded-2xl bg-[#0c1427]/90 border border-red-500/30 shadow-xl space-y-4">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-slate-800/80 pb-4">
+      <div className="p-6 rounded-2xl bg-[#080e1e]/90 border border-red-900/40 shadow-xl space-y-4">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-blue-950 pb-4">
           <div>
             <div className="flex items-center gap-2.5">
-              <div className="p-2 rounded-xl bg-red-950/80 border border-red-500/40 text-red-400">
+              <div className="p-2 rounded-xl bg-[#050b18] border border-red-500/40 text-red-400">
                 <Link2 className="w-5 h-5 animate-pulse" />
               </div>
               <h2 className="text-lg font-bold text-white tracking-wide font-sans">
@@ -140,7 +140,7 @@ export default function LinkAnalyzerView({ onRefresh }) {
 
           {/* Quick Metrics */}
           <div className="flex items-center gap-2 font-sans">
-            <div className="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-xs">
+            <div className="px-3 py-1.5 rounded-xl bg-[#050b18] border border-blue-950 text-xs">
               <span className="text-slate-400">Links Checked: </span>
               <span className="text-white font-bold font-mono">{linkStats?.total_scanned || links.length}</span>
             </div>
@@ -148,9 +148,9 @@ export default function LinkAnalyzerView({ onRefresh }) {
               <span className="text-red-300">Phishing Scams: </span>
               <span className="text-red-400 font-bold font-mono">{linkStats?.phishing_count || 0}</span>
             </div>
-            <div className="px-3 py-1.5 rounded-xl bg-purple-950/60 border border-purple-800/60 text-xs">
-              <span className="text-purple-300">Dangerous Files: </span>
-              <span className="text-purple-400 font-bold font-mono">{linkStats?.malware_count || 0}</span>
+            <div className="px-3 py-1.5 rounded-xl bg-blue-950/60 border border-blue-800/60 text-xs">
+              <span className="text-blue-300">Dangerous Files: </span>
+              <span className="text-blue-400 font-bold font-mono">{linkStats?.malware_count || 0}</span>
             </div>
           </div>
         </div>
@@ -164,7 +164,7 @@ export default function LinkAnalyzerView({ onRefresh }) {
               placeholder="Paste any website link e.g. http://secure-login-hdfc-kyc-update.xyz/verify-pan"
               value={inputUrl}
               onChange={(e) => setInputUrl(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 focus:border-red-500 outline-none text-sm text-white font-mono placeholder:text-slate-500"
+              className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#050b18] border border-blue-950 focus:border-red-500 outline-none text-sm text-white font-mono placeholder:text-slate-500"
             />
           </div>
           <button
@@ -179,14 +179,14 @@ export default function LinkAnalyzerView({ onRefresh }) {
 
         {/* Quick Sample Triggers */}
         <div className="flex flex-wrap items-center gap-2 pt-1 text-xs font-sans">
-          <span className="text-slate-500 font-medium">Try Sample Links:</span>
+          <span className="text-slate-400 font-medium">Try Sample Links:</span>
           <button
             onClick={() => {
               const url = "http://secure-login-hdfc-kyc-update.xyz/verify-pan";
               setInputUrl(url);
               handleScan(url);
             }}
-            className="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 hover:border-red-500/50 text-red-300 transition"
+            className="px-2.5 py-1 rounded-lg bg-[#050b18] border border-blue-950 hover:border-red-500/50 text-red-300 transition"
           >
             Fake Bank KYC Link
           </button>
@@ -197,7 +197,7 @@ export default function LinkAnalyzerView({ onRefresh }) {
               setInputUrl(url);
               handleScan(url);
             }}
-            className="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 hover:border-purple-500/50 text-purple-300 transition"
+            className="px-2.5 py-1 rounded-lg bg-[#050b18] border border-blue-950 hover:border-blue-500/50 text-blue-300 transition"
           >
             Fake APK File Download
           </button>
@@ -208,7 +208,7 @@ export default function LinkAnalyzerView({ onRefresh }) {
               setInputUrl(url);
               handleScan(url);
             }}
-            className="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 hover:border-emerald-500/50 text-emerald-300 transition"
+            className="px-2.5 py-1 rounded-lg bg-[#050b18] border border-blue-950 hover:border-emerald-500/50 text-emerald-300 transition"
           >
             Official Govt Portal (Safe)
           </button>
@@ -217,7 +217,7 @@ export default function LinkAnalyzerView({ onRefresh }) {
 
       {/* 2. Scan Inspection Results Panel */}
       {scanResult && (
-        <div className="p-6 rounded-2xl bg-[#0c1427]/90 border border-slate-800 shadow-xl space-y-5 font-sans">
+        <div className="p-6 rounded-2xl bg-[#080e1e]/90 border border-blue-900/40 shadow-xl space-y-5 font-sans">
           {/* Status Verdict Header */}
           {(() => {
             const badge = getStatusBadge(scanResult.threat_type);
@@ -245,22 +245,22 @@ export default function LinkAnalyzerView({ onRefresh }) {
             );
           })()}
 
-          {/* Redirection Chain Visualizer in Simple English */}
+          {/* Redirection Chain Visualizer */}
           <div className="space-y-2.5">
             <div className="text-xs font-semibold text-slate-300 flex items-center gap-2">
-              <Layers className="w-4 h-4 text-cyan-400" />
+              <Layers className="w-4 h-4 text-blue-400" />
               Where does this link redirect you? (Redirect Path):
             </div>
 
-            <div className="p-4 rounded-xl bg-[#070b14] border border-cyan-500/20 space-y-3 font-sans">
+            <div className="p-4 rounded-xl bg-[#030712] border border-blue-950 space-y-3 font-sans">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                 {getRedirectionChain(scanResult).map((hop) => (
                   <div
                     key={hop.hop}
-                    className="p-3 rounded-lg bg-slate-900/90 border border-slate-800 text-xs space-y-1 relative"
+                    className="p-3 rounded-lg bg-[#050b18] border border-blue-950 text-xs space-y-1 relative"
                   >
                     <div className="flex items-center justify-between text-[11px]">
-                      <span className="text-cyan-400 font-bold font-mono">Step {hop.hop}</span>
+                      <span className="text-blue-400 font-bold font-mono">Step {hop.hop}</span>
                       <span className={`px-1.5 py-0.2 rounded font-bold font-mono ${
                         hop.status === 200 ? 'bg-emerald-950 text-emerald-400' : 'bg-amber-950 text-amber-400'
                       }`}>
@@ -281,7 +281,7 @@ export default function LinkAnalyzerView({ onRefresh }) {
 
           {/* Threat Indicators Breakdown */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-            <div className="p-4 rounded-xl bg-slate-900/70 border border-slate-800 space-y-2">
+            <div className="p-4 rounded-xl bg-[#050b18] border border-blue-950 space-y-2">
               <span className="font-bold text-amber-400 flex items-center gap-1.5">
                 <AlertTriangle className="w-4 h-4" /> Why is this link dangerous?
               </span>
@@ -290,8 +290,8 @@ export default function LinkAnalyzerView({ onRefresh }) {
               </p>
             </div>
 
-            <div className="p-4 rounded-xl bg-slate-900/70 border border-slate-800 space-y-2">
-              <span className="font-bold text-cyan-400 flex items-center gap-1.5">
+            <div className="p-4 rounded-xl bg-[#050b18] border border-blue-950 space-y-2">
+              <span className="font-bold text-blue-400 flex items-center gap-1.5">
                 <Globe className="w-4 h-4" /> Website Host Information:
               </span>
               <div className="space-y-1 text-slate-300 font-mono">
@@ -305,16 +305,16 @@ export default function LinkAnalyzerView({ onRefresh }) {
       )}
 
       {/* 3. Historical Scanned URLs Table */}
-      <div className="p-6 rounded-2xl bg-[#0c1427]/90 border border-slate-800 shadow-xl space-y-4">
+      <div className="p-6 rounded-2xl bg-[#080e1e]/90 border border-blue-900/40 shadow-xl space-y-4">
         <h3 className="font-bold text-sm text-white font-sans flex items-center gap-2">
-          <Clock className="w-4 h-4 text-cyan-400" />
+          <Clock className="w-4 h-4 text-blue-400" />
           Recently Scanned Links ({links.length})
         </h3>
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs font-sans">
             <thead>
-              <tr className="border-b border-slate-800 text-slate-400 text-[11px]">
+              <tr className="border-b border-blue-950 text-slate-400 text-[11px]">
                 <th className="pb-3 font-semibold">Website Link / Domain</th>
                 <th className="pb-3 font-semibold">Safety Status</th>
                 <th className="pb-3 font-semibold">Confidence</th>
@@ -322,15 +322,15 @@ export default function LinkAnalyzerView({ onRefresh }) {
                 <th className="pb-3 font-semibold text-right">Action</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-800/80">
+            <tbody className="divide-y divide-blue-950">
               {links.map((item) => (
                 <tr
                   key={item.id}
                   onClick={() => setScanResult(item)}
-                  className="hover:bg-slate-900/60 transition group cursor-pointer"
+                  className="hover:bg-[#050b18]/80 transition group cursor-pointer"
                 >
                   <td className="py-3.5 pr-4 max-w-sm">
-                    <div className="font-bold text-white group-hover:text-cyan-300 truncate font-mono">
+                    <div className="font-bold text-white group-hover:text-blue-300 truncate font-mono">
                       {item.url}
                     </div>
                     <div className="text-[10px] text-slate-500 mt-0.5 font-mono">
@@ -342,7 +342,7 @@ export default function LinkAnalyzerView({ onRefresh }) {
                     <span className={`px-2 py-0.5 rounded font-bold text-[11px] ${
                       item.threat_type === 'Clean' ? 'bg-emerald-950 text-emerald-400 border border-emerald-800' :
                       item.threat_type === 'Phishing' ? 'bg-red-950 text-red-400 border border-red-800' :
-                      'bg-purple-950 text-purple-400 border border-purple-800'
+                      'bg-blue-950 text-blue-400 border border-blue-800'
                     }`}>
                       {item.threat_type === 'Clean' ? 'Safe' : item.threat_type}
                     </span>
@@ -364,7 +364,7 @@ export default function LinkAnalyzerView({ onRefresh }) {
                         e.stopPropagation();
                         setScanResult(item);
                       }}
-                      className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-cyan-300 text-[11px] transition ml-auto font-sans font-medium"
+                      className="px-3 py-1.5 rounded-lg bg-[#050b18] hover:bg-slate-900 border border-blue-950 text-blue-300 text-[11px] transition ml-auto font-sans font-medium"
                     >
                       View Details
                     </button>

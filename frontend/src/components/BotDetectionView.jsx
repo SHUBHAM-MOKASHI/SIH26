@@ -110,11 +110,11 @@ export default function BotDetectionView({ onRefresh }) {
   return (
     <div className="space-y-6">
       {/* 1. Header & Live Profile Scanner */}
-      <div className="p-6 rounded-2xl bg-[#0c1427]/90 border border-indigo-500/30 shadow-xl space-y-4">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-slate-800/80 pb-4">
+      <div className="p-6 rounded-2xl bg-[#080e1e]/90 border border-blue-900/40 shadow-xl space-y-4">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-blue-950 pb-4">
           <div>
             <div className="flex items-center gap-2.5">
-              <div className="p-2 rounded-xl bg-indigo-950/80 border border-indigo-500/40 text-indigo-400">
+              <div className="p-2 rounded-xl bg-[#050b18] border border-blue-500/40 text-blue-400">
                 <Bot className="w-5 h-5 animate-pulse" />
               </div>
               <h2 className="text-lg font-bold text-white tracking-wide font-sans">
@@ -128,7 +128,7 @@ export default function BotDetectionView({ onRefresh }) {
 
           {/* Quick Metrics */}
           <div className="flex items-center gap-2 font-sans">
-            <div className="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-xs">
+            <div className="px-3 py-1.5 rounded-xl bg-[#050b18] border border-blue-950 text-xs">
               <span className="text-slate-400">Accounts Checked: </span>
               <span className="text-white font-bold font-mono">{botStats?.total_analyzed || bots.length}</span>
             </div>
@@ -136,9 +136,9 @@ export default function BotDetectionView({ onRefresh }) {
               <span className="text-red-300">Fake Bots: </span>
               <span className="text-red-400 font-bold font-mono">{botStats?.flagged_bots_count || 0}</span>
             </div>
-            <div className="px-3 py-1.5 rounded-xl bg-indigo-950/60 border border-indigo-800/60 text-xs">
-              <span className="text-indigo-300">Spam Groups: </span>
-              <span className="text-indigo-400 font-bold font-mono">{botStats?.active_clusters_count || 0}</span>
+            <div className="px-3 py-1.5 rounded-xl bg-blue-950/60 border border-blue-800/60 text-xs">
+              <span className="text-blue-300">Spam Groups: </span>
+              <span className="text-blue-400 font-bold font-mono">{botStats?.active_clusters_count || 0}</span>
             </div>
           </div>
         </div>
@@ -152,26 +152,26 @@ export default function BotDetectionView({ onRefresh }) {
               placeholder="Enter any handle e.g. @spam_bot_node_01, @fake_news_alert, or username"
               value={scanUsername}
               onChange={(e) => setScanUsername(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 focus:border-indigo-500 outline-none text-sm text-white font-mono placeholder:text-slate-500"
+              className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#050b18] border border-blue-950 focus:border-blue-500 outline-none text-sm text-white font-mono placeholder:text-slate-500"
             />
           </div>
           <button
             type="submit"
             disabled={scanning}
-            className="px-6 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 font-bold text-xs font-sans transition disabled:opacity-50 text-white flex items-center justify-center gap-2 shadow-lg shadow-indigo-950/50"
+            className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-blue-700 via-blue-600 to-indigo-700 hover:from-blue-600 hover:to-indigo-600 font-bold text-xs font-sans transition disabled:opacity-50 text-white flex items-center justify-center gap-2 shadow-lg shadow-blue-950/50 border border-blue-500/40"
           >
-            <Sparkles className="w-4 h-4" />
+            <Sparkles className="w-4 h-4 text-blue-200" />
             {scanning ? 'Analyzing Account...' : 'Check Profile'}
           </button>
         </form>
       </div>
 
       {/* 2. Flagged Accounts Table */}
-      <div className="p-6 rounded-2xl bg-[#0c1427]/90 border border-slate-800 shadow-xl space-y-4">
+      <div className="p-6 rounded-2xl bg-[#080e1e]/90 border border-blue-900/40 shadow-xl space-y-4">
         {/* Table Controls */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-slate-800/80 pb-3">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-blue-950 pb-3">
           <h3 className="font-bold text-sm text-white flex items-center gap-2 font-sans">
-            <Users className="w-4 h-4 text-indigo-400" />
+            <Users className="w-4 h-4 text-blue-400" />
             Flagged Suspicious Accounts ({filteredBots.length})
           </h3>
 
@@ -183,14 +183,14 @@ export default function BotDetectionView({ onRefresh }) {
                 placeholder="Search usernames..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-8 pr-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs text-white outline-none focus:border-indigo-500 font-sans"
+                className="w-full pl-8 pr-3 py-1.5 rounded-lg bg-[#050b18] border border-blue-950 text-xs text-white outline-none focus:border-blue-500 font-sans placeholder:text-slate-500"
               />
             </div>
 
             <select
               value={clusterFilter}
               onChange={(e) => setClusterFilter(e.target.value)}
-              className="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs text-white outline-none font-sans"
+              className="px-3 py-1.5 rounded-lg bg-[#050b18] border border-blue-950 text-xs text-white outline-none font-sans"
             >
               <option value="">All Spam Networks</option>
               <option value="Cluster-Astroturf-Alpha">Spam Group Alpha</option>
@@ -203,7 +203,7 @@ export default function BotDetectionView({ onRefresh }) {
               className={`px-3 py-1.5 rounded-lg text-xs font-sans border transition ${
                 flaggedOnly
                   ? 'bg-red-950 text-red-300 border-red-700 font-bold'
-                  : 'bg-slate-900 text-slate-400 border-slate-700 hover:text-white'
+                  : 'bg-[#050b18] text-slate-400 border-blue-950 hover:text-white'
               }`}
             >
               High Risk Only
@@ -215,7 +215,7 @@ export default function BotDetectionView({ onRefresh }) {
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
             <thead>
-              <tr className="border-b border-slate-800 text-slate-400 text-[11px] font-sans">
+              <tr className="border-b border-blue-950 text-slate-400 text-[11px] font-sans">
                 <th className="pb-3 font-semibold">Account Handle</th>
                 <th className="pb-3 font-semibold">Bot Probability</th>
                 <th className="pb-3 font-semibold">Account Age</th>
@@ -224,22 +224,22 @@ export default function BotDetectionView({ onRefresh }) {
                 <th className="pb-3 font-semibold text-right">Action</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-800/80 font-sans">
+            <tbody className="divide-y divide-blue-950 font-sans">
               {filteredBots.map((account) => {
                 const scoreStyle = getScoreColor(account.bot_probability);
                 return (
                   <tr
                     key={account.id}
-                    className="hover:bg-slate-900/60 transition group cursor-pointer"
+                    className="hover:bg-[#050b18]/80 transition group cursor-pointer"
                     onClick={() => setSelectedBot(account)}
                   >
                     {/* Username */}
                     <td className="py-3.5 pr-4">
                       <div className="flex items-center gap-2">
-                        <span className="font-bold text-white group-hover:text-cyan-300 transition font-mono">
+                        <span className="font-bold text-white group-hover:text-blue-300 transition font-mono">
                           {account.username}
                         </span>
-                        <span className="text-[10px] px-1.5 py-0.2 rounded bg-slate-800 text-slate-400">
+                        <span className="text-[10px] px-1.5 py-0.2 rounded bg-blue-950 text-blue-300">
                           {account.platform}
                         </span>
                       </div>
@@ -258,7 +258,7 @@ export default function BotDetectionView({ onRefresh }) {
                           {account.posts_frequency_per_hr} posts/hr
                         </span>
                       </div>
-                      <div className="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+                      <div className="w-full bg-[#030712] h-1.5 rounded-full overflow-hidden border border-blue-950">
                         <div
                           className={`h-full rounded-full ${scoreStyle.bar}`}
                           style={{ width: `${account.bot_probability}%` }}
@@ -280,7 +280,7 @@ export default function BotDetectionView({ onRefresh }) {
                     {/* Spam Group */}
                     <td className="py-3.5 pr-4">
                       {account.network_cluster ? (
-                        <span className="px-2 py-0.5 rounded-md bg-indigo-950/80 text-indigo-300 border border-indigo-800 text-[11px] font-medium font-sans">
+                        <span className="px-2 py-0.5 rounded-md bg-blue-950/80 text-blue-300 border border-blue-800 text-[11px] font-medium font-sans">
                           {account.network_cluster}
                         </span>
                       ) : (
@@ -302,7 +302,7 @@ export default function BotDetectionView({ onRefresh }) {
                           e.stopPropagation();
                           setSelectedBot(account);
                         }}
-                        className="px-3 py-1.5 rounded-lg bg-indigo-950 hover:bg-indigo-900 border border-indigo-500/40 text-indigo-300 text-[11px] font-bold transition flex items-center gap-1 ml-auto font-sans"
+                        className="px-3 py-1.5 rounded-lg bg-blue-950 hover:bg-blue-900 border border-blue-500/40 text-blue-300 text-[11px] font-bold transition flex items-center gap-1 ml-auto font-sans"
                       >
                         <Network className="w-3.5 h-3.5" />
                         View Network
@@ -319,11 +319,11 @@ export default function BotDetectionView({ onRefresh }) {
       {/* 3. Connected Fake Network Modal */}
       {selectedBot && (
         <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-[#0c1427] border border-indigo-500/40 rounded-2xl w-full max-w-2xl overflow-hidden shadow-2xl space-y-4">
+          <div className="bg-[#080e1e] border border-blue-500/40 rounded-2xl w-full max-w-2xl overflow-hidden shadow-2xl space-y-4">
             {/* Header */}
-            <div className="p-5 border-b border-slate-800 flex items-center justify-between bg-slate-900/70">
+            <div className="p-5 border-b border-blue-950 flex items-center justify-between bg-[#050b18]">
               <div className="flex items-center gap-3">
-                <div className="p-2.5 rounded-xl bg-indigo-950/90 border border-indigo-500/50 text-indigo-400">
+                <div className="p-2.5 rounded-xl bg-blue-950/90 border border-blue-500/50 text-blue-400">
                   <Network className="w-5 h-5 animate-pulse" />
                 </div>
                 <div>
@@ -346,11 +346,11 @@ export default function BotDetectionView({ onRefresh }) {
             {/* Modal Body */}
             <div className="p-6 space-y-5 max-h-[75vh] overflow-y-auto font-sans text-xs">
               {/* Profile Overview Card */}
-              <div className="p-4 rounded-xl bg-slate-900/90 border border-slate-800 flex items-center justify-between">
+              <div className="p-4 rounded-xl bg-[#050b18] border border-blue-950 flex items-center justify-between">
                 <div>
                   <div className="flex items-center gap-2">
                     <span className="text-base font-bold text-white font-mono">{selectedBot.username}</span>
-                    <span className="px-2 py-0.5 rounded bg-slate-800 text-slate-300 text-xs">{selectedBot.platform}</span>
+                    <span className="px-2 py-0.5 rounded bg-blue-950 text-blue-300 text-xs">{selectedBot.platform}</span>
                   </div>
                   <div className="text-xs text-slate-400 mt-1 font-mono">
                     Followers: <span className="text-white">{selectedBot.followers_count}</span> | Following: <span className="text-white">{selectedBot.following_count}</span> | Speed: <span className="text-amber-400">{selectedBot.posts_frequency_per_hr} posts/hr</span>
@@ -368,27 +368,27 @@ export default function BotDetectionView({ onRefresh }) {
               {/* Connected Nodes */}
               <div className="space-y-2">
                 <div className="text-xs font-semibold text-slate-300 flex items-center gap-2">
-                  <Layers className="w-4 h-4 text-cyan-400" />
+                  <Layers className="w-4 h-4 text-blue-400" />
                   Connected Accounts in this Spam Network:
                 </div>
 
-                <div className="p-4 rounded-xl bg-[#070b14] border border-cyan-500/20 space-y-3">
+                <div className="p-4 rounded-xl bg-[#030712] border border-blue-950 space-y-3">
                   <div className="flex items-center justify-center">
-                    <div className="px-4 py-2 rounded-xl bg-indigo-950 border border-indigo-500 text-indigo-300 font-bold text-xs shadow-lg shadow-indigo-950">
+                    <div className="px-4 py-2 rounded-xl bg-blue-950 border border-blue-500 text-blue-300 font-bold text-xs shadow-lg shadow-blue-950">
                       🎯 Investigated Account: {selectedBot.username}
                     </div>
                   </div>
 
-                  <div className="flex justify-center text-slate-600 text-[11px]">↓ Linked Accounts Posting Simultaneously ↓</div>
+                  <div className="flex justify-center text-slate-500 text-[11px]">↓ Linked Accounts Posting Simultaneously ↓</div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                     {getNetworkConnections(selectedBot).map((conn, idx) => (
                       <div
                         key={idx}
-                        className="p-2.5 rounded-lg bg-slate-900/90 border border-slate-800 flex items-center justify-between text-xs"
+                        className="p-2.5 rounded-lg bg-[#050b18] border border-blue-950 flex items-center justify-between text-xs"
                       >
                         <div>
-                          <div className="font-bold text-cyan-300 font-mono">{conn.handle}</div>
+                          <div className="font-bold text-blue-300 font-mono">{conn.handle}</div>
                           <div className="text-[10px] text-slate-400">{conn.type}</div>
                         </div>
                         <div className="text-right">
@@ -403,7 +403,7 @@ export default function BotDetectionView({ onRefresh }) {
               </div>
 
               {/* Behavior Details */}
-              <div className="p-4 rounded-xl bg-slate-900/70 border border-slate-800 space-y-2">
+              <div className="p-4 rounded-xl bg-[#050b18] border border-blue-950 space-y-2">
                 <span className="font-semibold text-amber-400">Why was this account flagged?</span>
                 <p className="text-slate-300 leading-relaxed">
                   {selectedBot.abnormal_patterns}
@@ -412,13 +412,13 @@ export default function BotDetectionView({ onRefresh }) {
             </div>
 
             {/* Footer Actions */}
-            <div className="p-4 border-t border-slate-800 bg-slate-900/80 flex items-center justify-between font-sans text-xs">
+            <div className="p-4 border-t border-blue-950 bg-[#050b18] flex items-center justify-between font-sans text-xs">
               <button
                 onClick={() => {
                   navigator.clipboard.writeText(JSON.stringify(selectedBot, null, 2));
                   alert("Account data copied!");
                 }}
-                className="px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-slate-200 hover:text-white transition flex items-center gap-1.5"
+                className="px-3 py-2 rounded-xl bg-[#080e1e] border border-blue-950 text-slate-200 hover:text-white transition flex items-center gap-1.5"
               >
                 <Share2 className="w-3.5 h-3.5" /> Copy Account Data
               </button>
