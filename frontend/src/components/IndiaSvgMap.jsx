@@ -191,13 +191,13 @@ export default function IndiaSvgMap({ heatmaps = [], selectedRegion = '', onSele
     const data = getStateData(state.regionKey);
     const isSelected = selectedRegion && state.regionKey.toLowerCase().includes(selectedRegion.toLowerCase());
 
-    if (isSelected) return '#38bdf8'; // Glowing Sky Blue when selected
-    if (!data) return '#0f1d40'; // Deep Navy Slate default
+    if (isSelected) return '#ffffff'; // Stark White when selected
+    if (!data) return '#18181b'; // Deep Charcoal Zinc default
 
-    if (data.high_risk_count >= 4) return '#dc2626'; // High Risk (Red)
-    if (data.high_risk_count >= 1) return '#d97706'; // Moderate Risk (Amber)
-    if (data.post_count > 0) return '#1d4ed8'; // Active Monitoring (Royal Navy Blue)
-    return '#101d3d';
+    if (data.high_risk_count >= 4) return '#ffffff'; // High Risk (White)
+    if (data.high_risk_count >= 1) return '#71717a'; // Moderate Risk (Medium Gray)
+    if (data.post_count > 0) return '#3f3f46'; // Monitored (Darker Zinc)
+    return '#18181b';
   };
 
   return (
@@ -205,12 +205,12 @@ export default function IndiaSvgMap({ heatmaps = [], selectedRegion = '', onSele
       {/* SVG Vector Map Container */}
       <svg
         viewBox="60 10 540 650"
-        className="w-full max-h-[380px] drop-shadow-[0_10px_25px_rgba(0,0,0,0.8)] cursor-pointer"
+        className="w-full max-h-[380px] drop-shadow-[0_10px_25px_rgba(0,0,0,0.9)] cursor-pointer"
       >
-        {/* Background Radar / Cyber Circles */}
-        <circle cx="280" cy="330" r="280" fill="none" stroke="#1d4ed8" strokeWidth="0.75" strokeDasharray="6 6" opacity="0.3" />
-        <circle cx="280" cy="330" r="190" fill="none" stroke="#1d4ed8" strokeWidth="0.75" opacity="0.35" />
-        <circle cx="280" cy="330" r="100" fill="none" stroke="#1d4ed8" strokeWidth="0.75" opacity="0.4" />
+        {/* Background Radar / Monochrome Circles */}
+        <circle cx="280" cy="330" r="280" fill="none" stroke="#27272a" strokeWidth="0.75" strokeDasharray="6 6" opacity="0.4" />
+        <circle cx="280" cy="330" r="190" fill="none" stroke="#27272a" strokeWidth="0.75" opacity="0.4" />
+        <circle cx="280" cy="330" r="100" fill="none" stroke="#27272a" strokeWidth="0.75" opacity="0.5" />
 
         {/* State Boundaries */}
         <g className="states-group">
@@ -224,7 +224,7 @@ export default function IndiaSvgMap({ heatmaps = [], selectedRegion = '', onSele
                 key={state.id}
                 d={state.d}
                 fill={getStateFill(state)}
-                stroke={isSelected ? '#ffffff' : isHovered ? '#60a5fa' : '#1e3a8a'}
+                stroke={isSelected ? '#000000' : isHovered ? '#ffffff' : '#3f3f46'}
                 strokeWidth={isSelected ? '2.5' : isHovered ? '2' : '1.2'}
                 className="transition-all duration-200 hover:opacity-90 hover:brightness-125"
                 onMouseEnter={() => setHoveredItem({
@@ -268,7 +268,7 @@ export default function IndiaSvgMap({ heatmaps = [], selectedRegion = '', onSele
                   <circle
                     r="9"
                     fill="none"
-                    stroke="#ef4444"
+                    stroke="#ffffff"
                     strokeWidth="2"
                     className="animate-ping opacity-75 origin-center"
                   />
@@ -277,24 +277,24 @@ export default function IndiaSvgMap({ heatmaps = [], selectedRegion = '', onSele
                 {/* Outer Pin Halo */}
                 <circle
                   r="6"
-                  fill={hasThreat ? '#ef4444' : '#3b82f6'}
-                  stroke="#ffffff"
+                  fill={hasThreat ? '#ffffff' : '#71717a'}
+                  stroke="#000000"
                   strokeWidth="1.5"
                   className="transition-transform group-hover:scale-125"
                 />
 
                 {/* Inner Dot */}
-                <circle r="2.5" fill="#ffffff" />
+                <circle r="2.5" fill={hasThreat ? '#000000' : '#ffffff'} />
 
                 {/* City Label */}
                 <text
                   x="9"
                   y="3.5"
-                  fill="#f1f5f9"
+                  fill="#ffffff"
                   fontSize="9.5"
                   fontFamily="monospace"
                   fontWeight="bold"
-                  className="drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)] opacity-85 group-hover:opacity-100 group-hover:fill-blue-300"
+                  className="drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)] opacity-85 group-hover:opacity-100 group-hover:fill-zinc-200"
                 >
                   {city.name}
                 </text>
@@ -306,26 +306,26 @@ export default function IndiaSvgMap({ heatmaps = [], selectedRegion = '', onSele
 
       {/* Interactive Tooltip Card */}
       {hoveredItem && (
-        <div className="absolute top-2 right-2 p-3 rounded-xl bg-[#080e1e]/95 border border-blue-500/50 shadow-2xl backdrop-blur-md text-xs font-mono pointer-events-none z-20 min-w-[200px] animate-fadeIn">
-          <div className="font-bold text-white text-sm border-b border-blue-950 pb-1 flex items-center justify-between">
+        <div className="absolute top-2 right-2 p-3 rounded-xl bg-black/95 border border-zinc-700 shadow-2xl backdrop-blur-md text-xs font-mono pointer-events-none z-20 min-w-[200px] animate-fadeIn">
+          <div className="font-bold text-white text-sm border-b border-zinc-800 pb-1 flex items-center justify-between">
             <span>{hoveredItem.name}</span>
             <span className={`text-[10px] px-1.5 py-0.2 rounded font-bold ${
-              hoveredItem.threats >= 3 ? 'bg-red-950 text-red-400 border border-red-800' :
-              hoveredItem.threats >= 1 ? 'bg-amber-950 text-amber-400 border border-amber-800' :
-              'bg-emerald-950 text-emerald-400 border border-emerald-800'
+              hoveredItem.threats >= 3 ? 'bg-white text-black border border-white' :
+              hoveredItem.threats >= 1 ? 'bg-zinc-800 text-zinc-200 border border-zinc-700' :
+              'bg-zinc-900 text-zinc-400 border border-zinc-800'
             }`}>
               {hoveredItem.threats > 0 ? `${hoveredItem.threats} Threats` : 'Safe'}
             </span>
           </div>
           <div className="mt-2 space-y-1 text-[11px]">
-            <div className="text-slate-300">
+            <div className="text-zinc-300">
               Monitored Posts: <span className="font-bold text-white">{hoveredItem.posts}</span>
             </div>
-            <div className="text-slate-300">
-              Active Topic: <span className="font-bold text-blue-300">{hoveredItem.topic}</span>
+            <div className="text-zinc-300">
+              Active Topic: <span className="font-bold text-white">{hoveredItem.topic}</span>
             </div>
           </div>
-          <div className="mt-2 text-[10px] text-blue-400 font-sans border-t border-blue-950 pt-1">
+          <div className="mt-2 text-[10px] text-zinc-400 font-sans border-t border-zinc-800 pt-1">
             👉 Click to filter live posts for this state
           </div>
         </div>

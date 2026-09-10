@@ -36,15 +36,15 @@ export default function GeospatialThreatMap({ heatmaps = [], selectedRegion = ''
   };
 
   return (
-    <div className="p-5 rounded-2xl bg-[#080e1e]/90 border border-blue-900/40 flex flex-col justify-between shadow-xl space-y-4">
+    <div className="p-5 rounded-2xl bg-[#0e0e12] border border-zinc-800 flex flex-col justify-between shadow-xl space-y-4">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-blue-950 pb-3">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-zinc-800 pb-3">
         <div>
           <h3 className="font-bold text-base text-white flex items-center gap-2 font-sans">
-            <Globe2 className="w-5 h-5 text-blue-400" />
+            <Globe2 className="w-5 h-5 text-zinc-300" />
             Live India Safety Map
           </h3>
-          <p className="text-xs text-slate-400 font-sans mt-0.5">
+          <p className="text-xs text-zinc-400 font-sans mt-0.5">
             See which states have active rumors, scams, or fake news right now.
           </p>
         </div>
@@ -52,18 +52,18 @@ export default function GeospatialThreatMap({ heatmaps = [], selectedRegion = ''
         {/* Selected Region Status Pill */}
         <div className="flex items-center gap-2">
           {selectedRegion ? (
-            <div className="flex items-center gap-1.5 text-xs font-mono px-3 py-1 rounded-full bg-blue-950 text-blue-300 border border-blue-500/50">
+            <div className="flex items-center gap-1.5 text-xs font-mono px-3 py-1 rounded-full bg-white text-black font-bold shadow-sm">
               <span>Showing: <strong>{selectedRegion}</strong></span>
               <button 
                 onClick={handleClearSelection}
-                className="ml-1 text-slate-400 hover:text-white font-bold"
+                className="ml-1 text-zinc-600 hover:text-black font-bold"
                 title="Reset map view"
               >
                 ×
               </button>
             </div>
           ) : (
-            <span className="text-[11px] font-mono px-2.5 py-1 rounded-full bg-blue-950/80 text-blue-300 border border-blue-800/60 font-bold">
+            <span className="text-[11px] font-mono px-2.5 py-1 rounded-full bg-zinc-900 text-zinc-300 border border-zinc-700 font-bold">
               All States Active
             </span>
           )}
@@ -71,28 +71,28 @@ export default function GeospatialThreatMap({ heatmaps = [], selectedRegion = ''
       </div>
 
       {/* Map Legend */}
-      <div className="flex flex-wrap items-center gap-4 text-xs font-sans px-3 py-2 rounded-xl bg-[#050b18] border border-blue-950">
-        <span className="text-slate-400 font-medium">State Threat Colors:</span>
+      <div className="flex flex-wrap items-center gap-4 text-xs font-sans px-3 py-2 rounded-xl bg-black border border-zinc-800">
+        <span className="text-zinc-400 font-medium">State Threat Colors:</span>
         <div className="flex items-center gap-1.5">
-          <span className="w-3 h-3 rounded-full bg-red-600"></span>
-          <span className="text-red-300 font-mono">High Danger</span>
+          <span className="w-3 h-3 rounded-full bg-white border border-zinc-400"></span>
+          <span className="text-zinc-100 font-mono">High Danger</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <span className="w-3 h-3 rounded-full bg-amber-500"></span>
-          <span className="text-amber-300 font-mono">Medium Risk</span>
+          <span className="w-3 h-3 rounded-full bg-zinc-400"></span>
+          <span className="text-zinc-300 font-mono">Medium Risk</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <span className="w-3 h-3 rounded-full bg-blue-600"></span>
-          <span className="text-blue-300 font-mono">Monitored</span>
+          <span className="w-3 h-3 rounded-full bg-zinc-600"></span>
+          <span className="text-zinc-400 font-mono">Monitored</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <span className="w-3 h-3 rounded-full bg-sky-400"></span>
-          <span className="text-sky-300 font-mono">Selected</span>
+          <span className="w-3 h-3 rounded-full bg-zinc-800 border border-zinc-600"></span>
+          <span className="text-zinc-500 font-mono">Low / Safe</span>
         </div>
       </div>
 
       {/* Accurate Interactive India Map Container */}
-      <div className="relative rounded-xl bg-[#030712] border border-blue-950 overflow-hidden p-2 flex items-center justify-center min-h-[360px]">
+      <div className="relative rounded-xl bg-black border border-zinc-800 overflow-hidden p-2 flex items-center justify-center min-h-[360px]">
         <IndiaSvgMap 
           heatmaps={data} 
           selectedRegion={selectedRegion || activeState?.region || ''} 
@@ -102,12 +102,12 @@ export default function GeospatialThreatMap({ heatmaps = [], selectedRegion = ''
 
       {/* State List with Easy English Indicators */}
       <div className="space-y-2">
-        <div className="flex items-center justify-between text-xs font-mono text-slate-400">
+        <div className="flex items-center justify-between text-xs font-mono text-zinc-400">
           <span>Click any state below to view its posts:</span>
           {selectedRegion && (
             <button 
               onClick={handleClearSelection}
-              className="text-blue-400 hover:text-blue-300 flex items-center gap-1 text-[11px]"
+              className="text-white hover:underline flex items-center gap-1 text-[11px]"
             >
               <RotateCcw className="w-3 h-3" /> Show All
             </button>
@@ -126,29 +126,29 @@ export default function GeospatialThreatMap({ heatmaps = [], selectedRegion = ''
                 onClick={() => handleStateSelect(item.region)}
                 className={`p-2.5 rounded-xl border transition cursor-pointer flex items-center justify-between ${
                   isSelected
-                    ? 'bg-blue-950/90 border-blue-400 text-white shadow-lg'
-                    : 'bg-[#050b18] border-blue-950 hover:border-blue-700/50 text-slate-200'
+                    ? 'bg-zinc-800 border-white text-white shadow-lg'
+                    : 'bg-black border-zinc-800 hover:border-zinc-600 text-zinc-200'
                 }`}
               >
                 <div className="flex items-center gap-2">
-                  <MapPin className={`w-3.5 h-3.5 ${isHighRisk ? 'text-red-400' : isMediumRisk ? 'text-amber-400' : 'text-blue-400'}`} />
+                  <MapPin className={`w-3.5 h-3.5 ${isHighRisk ? 'text-white' : isMediumRisk ? 'text-zinc-300' : 'text-zinc-500'}`} />
                   <div>
                     <div className="font-bold text-white text-xs">{item.region}</div>
-                    <div className="text-[10px] text-slate-400 truncate max-w-[120px]">
-                      Topic: <span className="text-blue-300">{item.dominant_topic}</span>
+                    <div className="text-[10px] text-zinc-400 truncate max-w-[120px]">
+                      Topic: <span className="text-zinc-200">{item.dominant_topic}</span>
                     </div>
                   </div>
                 </div>
 
                 <div className="text-right">
                   <span className={`px-2 py-0.5 rounded font-bold text-[10px] ${
-                    isHighRisk ? 'bg-red-950 text-red-400 border border-red-800' :
-                    isMediumRisk ? 'bg-amber-950 text-amber-400 border border-amber-800' :
-                    'bg-emerald-950 text-emerald-400 border border-emerald-800'
+                    isHighRisk ? 'bg-white text-black border border-white' :
+                    isMediumRisk ? 'bg-zinc-800 text-zinc-200 border border-zinc-700' :
+                    'bg-zinc-900 text-zinc-400 border border-zinc-800'
                   }`}>
                     {item.high_risk_count > 0 ? `${item.high_risk_count} Threats` : 'Safe'}
                   </span>
-                  <span className="text-[10px] text-slate-500 block mt-0.5">{item.post_count} posts</span>
+                  <span className="text-[10px] text-zinc-500 block mt-0.5">{item.post_count} posts</span>
                 </div>
               </div>
             );
