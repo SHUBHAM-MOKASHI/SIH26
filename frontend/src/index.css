@@ -4,57 +4,49 @@
 
 @layer base {
   body {
-    @apply bg-[#030919] text-white font-sans selection:bg-blue-500 selection:text-white;
-    background-color: #030919;
+    @apply bg-[#0B0F17] text-slate-100 font-sans selection:bg-indigo-500/30 selection:text-white;
+    background-color: #0B0F17;
     background-image: 
-      radial-gradient(rgba(59, 130, 246, 0.15) 1px, transparent 1px),
-      radial-gradient(rgba(96, 165, 250, 0.08) 1px, #030919 1px);
-    background-size: 28px 28px;
-    background-position: 0 0, 14px 14px;
+      radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+      radial-gradient(rgba(255, 255, 255, 0.02) 1px, #0B0F17 1px);
+    background-size: 24px 24px;
+    background-position: 0 0, 12px 12px;
   }
 }
 
-/* Glassmorphism & Blue & White Elements */
+/* Glassmorphism & Enterprise Panel Styles */
 .glass-panel {
-  background: rgba(8, 24, 56, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(96, 165, 250, 0.2);
+  background: rgba(17, 24, 39, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(51, 65, 85, 0.5);
 }
 
 .glass-panel:hover {
-  border-color: rgba(96, 165, 250, 0.45);
-}
-
-.glow-blue {
-  box-shadow: 0 0 25px -5px rgba(59, 130, 246, 0.35);
-}
-
-.glow-white {
-  box-shadow: 0 0 25px -5px rgba(255, 255, 255, 0.35);
+  border-color: rgba(71, 85, 105, 0.7);
 }
 
 .glow-subtle {
-  box-shadow: 0 4px 20px -2px rgba(3, 9, 25, 0.85);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5);
 }
 
-/* Custom Blue & White Scrollbar */
+/* Custom Sleek Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #030919;
+  background: #0B0F17;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1e3a8a;
+  background: #1E293B;
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #3b82f6;
+  background: #334155;
 }
 
 @keyframes radar-sweep {

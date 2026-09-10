@@ -191,13 +191,13 @@ export default function IndiaSvgMap({ heatmaps = [], selectedRegion = '', onSele
     const data = getStateData(state.regionKey);
     const isSelected = selectedRegion && state.regionKey.toLowerCase().includes(selectedRegion.toLowerCase());
 
-    if (isSelected) return '#ffffff'; // Stark White when selected
-    if (!data) return '#091838'; // Deep Navy Blue default
+    if (isSelected) return '#06B6D4'; // Vibrant Cyan when selected
+    if (!data) return '#1E293B'; // Slate-800 default
 
-    if (data.high_risk_count >= 4) return '#ffffff'; // High Risk (Pure White)
-    if (data.high_risk_count >= 1) return '#3b82f6'; // Moderate Risk (Bright Electric Blue)
-    if (data.post_count > 0) return '#1d4ed8'; // Monitored (Royal Blue)
-    return '#091838';
+    if (data.high_risk_count >= 4) return '#E11D48'; // High Danger (Rose/Coral)
+    if (data.high_risk_count >= 1) return '#D97706'; // Medium Risk (Amber/Gold)
+    if (data.post_count > 0) return '#0D9488'; // Monitored (Slate Teal)
+    return '#1E293B';
   };
 
   return (
@@ -205,12 +205,12 @@ export default function IndiaSvgMap({ heatmaps = [], selectedRegion = '', onSele
       {/* SVG Vector Map Container */}
       <svg
         viewBox="60 10 540 650"
-        className="w-full max-h-[380px] drop-shadow-[0_10px_25px_rgba(3,9,25,0.9)] cursor-pointer"
+        className="w-full max-h-[380px] drop-shadow-[0_10px_25px_rgba(0,0,0,0.8)] cursor-pointer"
       >
-        {/* Background Radar / Blue Rings */}
-        <circle cx="280" cy="330" r="280" fill="none" stroke="#1e3a8a" strokeWidth="0.75" strokeDasharray="6 6" opacity="0.4" />
-        <circle cx="280" cy="330" r="190" fill="none" stroke="#1e3a8a" strokeWidth="0.75" opacity="0.4" />
-        <circle cx="280" cy="330" r="100" fill="none" stroke="#1e3a8a" strokeWidth="0.75" opacity="0.5" />
+        {/* Background Radar / Rings */}
+        <circle cx="280" cy="330" r="280" fill="none" stroke="#1E293B" strokeWidth="0.75" strokeDasharray="6 6" opacity="0.6" />
+        <circle cx="280" cy="330" r="190" fill="none" stroke="#1E293B" strokeWidth="0.75" opacity="0.6" />
+        <circle cx="280" cy="330" r="100" fill="none" stroke="#1E293B" strokeWidth="0.75" opacity="0.7" />
 
         {/* State Boundaries */}
         <g className="states-group">
@@ -224,7 +224,7 @@ export default function IndiaSvgMap({ heatmaps = [], selectedRegion = '', onSele
                 key={state.id}
                 d={state.d}
                 fill={getStateFill(state)}
-                stroke={isSelected ? '#05112e' : isHovered ? '#ffffff' : '#1e40af'}
+                stroke={isSelected ? '#ffffff' : isHovered ? '#38BDF8' : '#0B0F17'}
                 strokeWidth={isSelected ? '2.5' : isHovered ? '2' : '1.2'}
                 className="transition-all duration-200 hover:opacity-90 hover:brightness-125"
                 onMouseEnter={() => setHoveredItem({
@@ -245,8 +245,12 @@ export default function IndiaSvgMap({ heatmaps = [], selectedRegion = '', onSele
         <g className="city-pins">
           {MAJOR_CITIES.map((city) => {
             const data = getStateData(city.state);
+            const isHigh = (data?.high_risk_count || 0) >= 3;
+            const isMedium = (data?.high_risk_count || 0) >= 1 && (data?.high_risk_count || 0) < 3;
             const hasThreat = (data?.high_risk_count || 0) > 0;
             const isSelected = selectedRegion && city.state.toLowerCase().includes(selectedRegion.toLowerCase());
+
+            const pinColor = isHigh ? '#F43F5E' : isMedium ? '#F59E0B' : '#06B6D4';
 
             return (
               <g
@@ -266,35 +270,35 @@ export default function IndiaSvgMap({ heatmaps = [], selectedRegion = '', onSele
                 {/* Ping Animation Ring for high alert cities */}
                 {hasThreat && (
                   <circle
-                    r="9"
+                    r="8"
                     fill="none"
-                    stroke="#ffffff"
-                    strokeWidth="2"
+                    stroke={pinColor}
+                    strokeWidth="1.5"
                     className="animate-ping opacity-75 origin-center"
                   />
                 )}
 
                 {/* Outer Pin Halo */}
                 <circle
-                  r="6"
-                  fill={hasThreat ? '#ffffff' : '#3b82f6'}
-                  stroke="#05112e"
+                  r="5.5"
+                  fill={pinColor}
+                  stroke="#0B0F17"
                   strokeWidth="1.5"
-                  className="transition-transform group-hover:scale-125"
+                  className="transition-transform group-hover:scale-125 shadow-md"
                 />
 
                 {/* Inner Dot */}
-                <circle r="2.5" fill={hasThreat ? '#05112e' : '#ffffff'} />
+                <circle r="2" fill="#ffffff" />
 
                 {/* City Label */}
                 <text
-                  x="9"
+                  x="8"
                   y="3.5"
-                  fill="#ffffff"
+                  fill="#F8FAFC"
                   fontSize="9.5"
                   fontFamily="monospace"
                   fontWeight="bold"
-                  className="drop-shadow-[0_1px_3px_rgba(3,9,25,0.95)] opacity-90 group-hover:opacity-100 group-hover:fill-blue-200"
+                  className="drop-shadow-[0_1px_3px_rgba(0,0,0,0.95)] opacity-90 group-hover:opacity-100 group-hover:fill-cyan-300"
                 >
                   {city.name}
                 </text>
@@ -306,26 +310,26 @@ export default function IndiaSvgMap({ heatmaps = [], selectedRegion = '', onSele
 
       {/* Interactive Tooltip Card */}
       {hoveredItem && (
-        <div className="absolute top-2 right-2 p-3 rounded-xl bg-[#05112e]/95 border border-blue-500 shadow-2xl backdrop-blur-md text-xs font-mono pointer-events-none z-20 min-w-[200px] animate-fadeIn">
-          <div className="font-bold text-white text-sm border-b border-blue-900 pb-1 flex items-center justify-between">
+        <div className="absolute top-2 right-2 p-3 rounded-xl bg-[#0B0F17]/95 border border-slate-700 shadow-2xl backdrop-blur-md text-xs font-mono pointer-events-none z-20 min-w-[200px] animate-fadeIn">
+          <div className="font-bold text-slate-100 text-sm border-b border-slate-800 pb-1 flex items-center justify-between">
             <span>{hoveredItem.name}</span>
-            <span className={`text-[10px] px-1.5 py-0.2 rounded font-bold ${
-              hoveredItem.threats >= 3 ? 'bg-white text-blue-950 border border-blue-200' :
-              hoveredItem.threats >= 1 ? 'bg-blue-900 text-blue-200 border border-blue-700' :
-              'bg-blue-950 text-blue-300 border border-blue-800'
+            <span className={`text-[10px] px-1.5 py-0.2 rounded font-bold border ${
+              hoveredItem.threats >= 3 ? 'bg-rose-500/10 text-rose-400 border-rose-500/30' :
+              hoveredItem.threats >= 1 ? 'bg-amber-500/10 text-amber-400 border-amber-500/30' :
+              'bg-emerald-500/10 text-emerald-400 border-emerald-500/30'
             }`}>
               {hoveredItem.threats > 0 ? `${hoveredItem.threats} Threats` : 'Safe'}
             </span>
           </div>
           <div className="mt-2 space-y-1 text-[11px]">
-            <div className="text-blue-200">
-              Monitored Posts: <span className="font-bold text-white">{hoveredItem.posts}</span>
+            <div className="text-slate-400">
+              Monitored Posts: <span className="font-bold text-slate-200">{hoveredItem.posts}</span>
             </div>
-            <div className="text-blue-200">
-              Active Topic: <span className="font-bold text-white">{hoveredItem.topic}</span>
+            <div className="text-slate-400">
+              Active Topic: <span className="font-bold text-slate-200">{hoveredItem.topic}</span>
             </div>
           </div>
-          <div className="mt-2 text-[10px] text-blue-300 font-sans border-t border-blue-900 pt-1">
+          <div className="mt-2 text-[10px] text-cyan-400 font-sans border-t border-slate-800 pt-1">
             👉 Click to filter live posts for this state
           </div>
         </div>

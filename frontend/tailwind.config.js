@@ -8,20 +8,12 @@ export default {
   theme: {
     extend: {
       colors: {
-        brand: {
-          950: '#030712',
-          900: '#06122c',
-          850: '#091838',
-          800: '#0c214d',
-          750: '#102b66',
-          700: '#1d4ed8',
-          600: '#2563eb',
-          500: '#3b82f6',
-          400: '#60a5fa',
-          300: '#93c5fd',
-          200: '#bfdbfe',
-          100: '#dbeafe',
-          50: '#eff6ff',
+        dark: {
+          bg: '#0B0F17',
+          surface: '#111827',
+          elevated: '#1F2937',
+          border: '#1E293B',
+          hover: '#334155',
         }
       },
       fontFamily: {
