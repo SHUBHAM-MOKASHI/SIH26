@@ -192,12 +192,12 @@ export default function IndiaSvgMap({ heatmaps = [], selectedRegion = '', onSele
     const isSelected = selectedRegion && state.regionKey.toLowerCase().includes(selectedRegion.toLowerCase());
 
     if (isSelected) return '#ffffff'; // Stark White when selected
-    if (!data) return '#18181b'; // Deep Charcoal Zinc default
+    if (!data) return '#091838'; // Deep Navy Blue default
 
-    if (data.high_risk_count >= 4) return '#ffffff'; // High Risk (White)
-    if (data.high_risk_count >= 1) return '#71717a'; // Moderate Risk (Medium Gray)
-    if (data.post_count > 0) return '#3f3f46'; // Monitored (Darker Zinc)
-    return '#18181b';
+    if (data.high_risk_count >= 4) return '#ffffff'; // High Risk (Pure White)
+    if (data.high_risk_count >= 1) return '#3b82f6'; // Moderate Risk (Bright Electric Blue)
+    if (data.post_count > 0) return '#1d4ed8'; // Monitored (Royal Blue)
+    return '#091838';
   };
 
   return (
@@ -205,12 +205,12 @@ export default function IndiaSvgMap({ heatmaps = [], selectedRegion = '', onSele
       {/* SVG Vector Map Container */}
       <svg
         viewBox="60 10 540 650"
-        className="w-full max-h-[380px] drop-shadow-[0_10px_25px_rgba(0,0,0,0.9)] cursor-pointer"
+        className="w-full max-h-[380px] drop-shadow-[0_10px_25px_rgba(3,9,25,0.9)] cursor-pointer"
       >
-        {/* Background Radar / Monochrome Circles */}
-        <circle cx="280" cy="330" r="280" fill="none" stroke="#27272a" strokeWidth="0.75" strokeDasharray="6 6" opacity="0.4" />
-        <circle cx="280" cy="330" r="190" fill="none" stroke="#27272a" strokeWidth="0.75" opacity="0.4" />
-        <circle cx="280" cy="330" r="100" fill="none" stroke="#27272a" strokeWidth="0.75" opacity="0.5" />
+        {/* Background Radar / Blue Rings */}
+        <circle cx="280" cy="330" r="280" fill="none" stroke="#1e3a8a" strokeWidth="0.75" strokeDasharray="6 6" opacity="0.4" />
+        <circle cx="280" cy="330" r="190" fill="none" stroke="#1e3a8a" strokeWidth="0.75" opacity="0.4" />
+        <circle cx="280" cy="330" r="100" fill="none" stroke="#1e3a8a" strokeWidth="0.75" opacity="0.5" />
 
         {/* State Boundaries */}
         <g className="states-group">
@@ -224,7 +224,7 @@ export default function IndiaSvgMap({ heatmaps = [], selectedRegion = '', onSele
                 key={state.id}
                 d={state.d}
                 fill={getStateFill(state)}
-                stroke={isSelected ? '#000000' : isHovered ? '#ffffff' : '#3f3f46'}
+                stroke={isSelected ? '#05112e' : isHovered ? '#ffffff' : '#1e40af'}
                 strokeWidth={isSelected ? '2.5' : isHovered ? '2' : '1.2'}
                 className="transition-all duration-200 hover:opacity-90 hover:brightness-125"
                 onMouseEnter={() => setHoveredItem({
@@ -277,14 +277,14 @@ export default function IndiaSvgMap({ heatmaps = [], selectedRegion = '', onSele
                 {/* Outer Pin Halo */}
                 <circle
                   r="6"
-                  fill={hasThreat ? '#ffffff' : '#71717a'}
-                  stroke="#000000"
+                  fill={hasThreat ? '#ffffff' : '#3b82f6'}
+                  stroke="#05112e"
                   strokeWidth="1.5"
                   className="transition-transform group-hover:scale-125"
                 />
 
                 {/* Inner Dot */}
-                <circle r="2.5" fill={hasThreat ? '#000000' : '#ffffff'} />
+                <circle r="2.5" fill={hasThreat ? '#05112e' : '#ffffff'} />
 
                 {/* City Label */}
                 <text
@@ -294,7 +294,7 @@ export default function IndiaSvgMap({ heatmaps = [], selectedRegion = '', onSele
                   fontSize="9.5"
                   fontFamily="monospace"
                   fontWeight="bold"
-                  className="drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)] opacity-85 group-hover:opacity-100 group-hover:fill-zinc-200"
+                  className="drop-shadow-[0_1px_3px_rgba(3,9,25,0.95)] opacity-90 group-hover:opacity-100 group-hover:fill-blue-200"
                 >
                   {city.name}
                 </text>
@@ -306,26 +306,26 @@ export default function IndiaSvgMap({ heatmaps = [], selectedRegion = '', onSele
 
       {/* Interactive Tooltip Card */}
       {hoveredItem && (
-        <div className="absolute top-2 right-2 p-3 rounded-xl bg-black/95 border border-zinc-700 shadow-2xl backdrop-blur-md text-xs font-mono pointer-events-none z-20 min-w-[200px] animate-fadeIn">
-          <div className="font-bold text-white text-sm border-b border-zinc-800 pb-1 flex items-center justify-between">
+        <div className="absolute top-2 right-2 p-3 rounded-xl bg-[#05112e]/95 border border-blue-500 shadow-2xl backdrop-blur-md text-xs font-mono pointer-events-none z-20 min-w-[200px] animate-fadeIn">
+          <div className="font-bold text-white text-sm border-b border-blue-900 pb-1 flex items-center justify-between">
             <span>{hoveredItem.name}</span>
             <span className={`text-[10px] px-1.5 py-0.2 rounded font-bold ${
-              hoveredItem.threats >= 3 ? 'bg-white text-black border border-white' :
-              hoveredItem.threats >= 1 ? 'bg-zinc-800 text-zinc-200 border border-zinc-700' :
-              'bg-zinc-900 text-zinc-400 border border-zinc-800'
+              hoveredItem.threats >= 3 ? 'bg-white text-blue-950 border border-blue-200' :
+              hoveredItem.threats >= 1 ? 'bg-blue-900 text-blue-200 border border-blue-700' :
+              'bg-blue-950 text-blue-300 border border-blue-800'
             }`}>
               {hoveredItem.threats > 0 ? `${hoveredItem.threats} Threats` : 'Safe'}
             </span>
           </div>
           <div className="mt-2 space-y-1 text-[11px]">
-            <div className="text-zinc-300">
+            <div className="text-blue-200">
               Monitored Posts: <span className="font-bold text-white">{hoveredItem.posts}</span>
             </div>
-            <div className="text-zinc-300">
+            <div className="text-blue-200">
               Active Topic: <span className="font-bold text-white">{hoveredItem.topic}</span>
             </div>
           </div>
-          <div className="mt-2 text-[10px] text-zinc-400 font-sans border-t border-zinc-800 pt-1">
+          <div className="mt-2 text-[10px] text-blue-300 font-sans border-t border-blue-900 pt-1">
             👉 Click to filter live posts for this state
           </div>
         </div>

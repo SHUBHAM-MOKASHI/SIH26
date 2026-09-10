@@ -76,27 +76,27 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-zinc-100 flex flex-col selection:bg-white selection:text-black font-sans">
-      {/* 1. Header with Black & White Theme */}
+    <div className="min-h-screen bg-[#030919] text-white flex flex-col selection:bg-blue-500 selection:text-white font-sans">
+      {/* 1. Header with Blue & White Theme */}
       <Header 
         onRefresh={fetchAllData} 
         loading={loading}
         onOpenReportModal={() => handleOpenReportWithTopic(selectedTopic)}
       />
 
-      {/* Navigation Bar - Black & White Theme */}
-      <div className="border-b border-zinc-800/80 bg-zinc-950/90 backdrop-blur-md px-6 py-2.5">
+      {/* Navigation Bar - Blue & White Theme */}
+      <div className="border-b border-blue-900/60 bg-[#05112e]/90 backdrop-blur-md px-6 py-2.5">
         <div className="max-w-7xl mx-auto flex items-center gap-2 overflow-x-auto">
           {/* Tab 1: Main Dashboard */}
           <button
             onClick={() => setActiveTab('dashboard')}
             className={`px-4 py-2 rounded-xl text-xs font-sans font-bold transition flex items-center gap-2 ${
               activeTab === 'dashboard'
-                ? 'bg-white text-black border border-white shadow-md shadow-white/10'
-                : 'text-zinc-400 hover:text-white hover:bg-zinc-900/80'
+                ? 'bg-blue-600 text-white border border-blue-400 shadow-lg shadow-blue-600/30'
+                : 'text-blue-200 hover:text-white hover:bg-blue-900/50'
             }`}
           >
-            <LayoutDashboard className={`w-3.5 h-3.5 ${activeTab === 'dashboard' ? 'text-black' : 'text-zinc-400'}`} />
+            <LayoutDashboard className={`w-3.5 h-3.5 ${activeTab === 'dashboard' ? 'text-white' : 'text-blue-300'}`} />
             Main Dashboard
           </button>
 
@@ -105,11 +105,11 @@ export default function App() {
             onClick={() => setActiveTab('bots')}
             className={`px-4 py-2 rounded-xl text-xs font-sans font-bold transition flex items-center gap-2 ${
               activeTab === 'bots'
-                ? 'bg-white text-black border border-white shadow-md shadow-white/10'
-                : 'text-zinc-400 hover:text-white hover:bg-zinc-900/80'
+                ? 'bg-blue-600 text-white border border-blue-400 shadow-lg shadow-blue-600/30'
+                : 'text-blue-200 hover:text-white hover:bg-blue-900/50'
             }`}
           >
-            <Bot className={`w-3.5 h-3.5 ${activeTab === 'bots' ? 'text-black' : 'text-zinc-400'}`} />
+            <Bot className={`w-3.5 h-3.5 ${activeTab === 'bots' ? 'text-white' : 'text-blue-300'}`} />
             Fake Accounts & Bot Scanner
           </button>
 
@@ -118,11 +118,11 @@ export default function App() {
             onClick={() => setActiveTab('links')}
             className={`px-4 py-2 rounded-xl text-xs font-sans font-bold transition flex items-center gap-2 ${
               activeTab === 'links'
-                ? 'bg-white text-black border border-white shadow-md shadow-white/10'
-                : 'text-zinc-400 hover:text-white hover:bg-zinc-900/80'
+                ? 'bg-blue-600 text-white border border-blue-400 shadow-lg shadow-blue-600/30'
+                : 'text-blue-200 hover:text-white hover:bg-blue-900/50'
             }`}
           >
-            <Link2 className={`w-3.5 h-3.5 ${activeTab === 'links' ? 'text-black' : 'text-zinc-400'}`} />
+            <Link2 className={`w-3.5 h-3.5 ${activeTab === 'links' ? 'text-white' : 'text-blue-300'}`} />
             Dangerous Links & Scam Scanner
           </button>
 
@@ -131,11 +131,11 @@ export default function App() {
             onClick={() => setActiveTab('reports')}
             className={`px-4 py-2 rounded-xl text-xs font-sans font-bold transition flex items-center gap-2 ${
               activeTab === 'reports'
-                ? 'bg-white text-black border border-white shadow-md shadow-white/10'
-                : 'text-zinc-400 hover:text-white hover:bg-zinc-900/80'
+                ? 'bg-blue-600 text-white border border-blue-400 shadow-lg shadow-blue-600/30'
+                : 'text-blue-200 hover:text-white hover:bg-blue-900/50'
             }`}
           >
-            <FileText className={`w-3.5 h-3.5 ${activeTab === 'reports' ? 'text-black' : 'text-zinc-400'}`} />
+            <FileText className={`w-3.5 h-3.5 ${activeTab === 'reports' ? 'text-white' : 'text-blue-300'}`} />
             Generated Safety Reports ({reports.length})
           </button>
         </div>
@@ -196,48 +196,48 @@ export default function App() {
         {/* VIEW 4: GENERATED SAFETY REPORTS */}
         {activeTab === 'reports' && (
           <div className="space-y-6">
-            <div className="p-6 rounded-2xl bg-[#0e0e12] border border-zinc-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-xl">
+            <div className="p-6 rounded-2xl bg-[#081836] border border-blue-800/80 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-xl">
               <div>
                 <h3 className="text-lg font-bold text-white flex items-center gap-2 font-sans">
-                  <FileText className="w-5 h-5 text-zinc-300" />
+                  <FileText className="w-5 h-5 text-blue-400" />
                   Official Safety Summary Reports
                 </h3>
-                <p className="text-xs text-zinc-400 font-sans mt-1">
+                <p className="text-xs text-blue-200/80 font-sans mt-1">
                   Download or print complete summaries with fake account findings, blocked links, and recommended safety steps.
                 </p>
               </div>
 
               <button
                 onClick={() => handleOpenReportWithTopic('')}
-                className="px-4 py-2 rounded-xl bg-white hover:bg-zinc-200 text-black font-sans text-xs font-bold transition flex items-center gap-2 shadow-lg shadow-white/5 border border-zinc-300"
+                className="px-4 py-2 rounded-xl bg-white hover:bg-blue-50 text-blue-950 font-sans text-xs font-bold transition flex items-center gap-2 shadow-lg shadow-blue-500/20 border border-blue-200"
               >
-                <Sparkles className="w-4 h-4 text-black" />
+                <Sparkles className="w-4 h-4 text-blue-600" />
                 <span>Create New Report</span>
               </button>
             </div>
 
             <div className="space-y-4">
               {reports.map((r) => (
-                <div key={r.id} className="p-6 rounded-2xl bg-[#0e0e12] border border-zinc-800/80 space-y-3 shadow-lg">
+                <div key={r.id} className="p-6 rounded-2xl bg-[#081836] border border-blue-900/80 space-y-3 shadow-lg">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                    <h4 className="font-bold text-zinc-100 text-base">{r.title}</h4>
+                    <h4 className="font-bold text-white text-base">{r.title}</h4>
                     <div className="flex items-center gap-2">
-                      <span className="text-xs px-2.5 py-1 rounded-full bg-zinc-900 border border-zinc-700 text-zinc-200 font-mono font-bold">
+                      <span className="text-xs px-2.5 py-1 rounded-full bg-blue-950 border border-blue-600 text-blue-200 font-mono font-bold">
                         Threat: {r.threat_level}
                       </span>
                       <button
                         onClick={() => handleOpenReportWithTopic(r.top_misinfo_narratives)}
-                        className="px-3 py-1 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-xs font-sans text-zinc-200 border border-zinc-700 flex items-center gap-1 transition"
+                        className="px-3 py-1 rounded-lg bg-blue-900/60 hover:bg-blue-800 text-xs font-sans text-white border border-blue-700 flex items-center gap-1 transition"
                       >
                         <Printer className="w-3.5 h-3.5" /> Printable View
                       </button>
                     </div>
                   </div>
-                  <p className="text-sm text-zinc-300 leading-relaxed font-sans">{r.summary}</p>
+                  <p className="text-sm text-blue-100/90 leading-relaxed font-sans">{r.summary}</p>
                   
-                  <div className="p-4 rounded-xl bg-black border border-zinc-800 text-xs space-y-1">
-                    <div className="font-bold text-zinc-300 font-sans">Recommended Safety Steps:</div>
-                    <pre className="font-sans text-zinc-400 whitespace-pre-wrap leading-relaxed">{r.actionable_recommendations}</pre>
+                  <div className="p-4 rounded-xl bg-[#040d21] border border-blue-900/80 text-xs space-y-1">
+                    <div className="font-bold text-blue-300 font-sans">Recommended Safety Steps:</div>
+                    <pre className="font-sans text-blue-200/80 whitespace-pre-wrap leading-relaxed">{r.actionable_recommendations}</pre>
                   </div>
                 </div>
               ))}

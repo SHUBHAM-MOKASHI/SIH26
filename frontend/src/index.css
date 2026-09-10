@@ -4,57 +4,57 @@
 
 @layer base {
   body {
-    @apply bg-black text-zinc-100 font-sans selection:bg-white selection:text-black;
-    background-color: #000000;
+    @apply bg-[#030919] text-white font-sans selection:bg-blue-500 selection:text-white;
+    background-color: #030919;
     background-image: 
-      radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
-      radial-gradient(rgba(255, 255, 255, 0.03) 1px, #000000 1px);
+      radial-gradient(rgba(59, 130, 246, 0.15) 1px, transparent 1px),
+      radial-gradient(rgba(96, 165, 250, 0.08) 1px, #030919 1px);
     background-size: 28px 28px;
     background-position: 0 0, 14px 14px;
   }
 }
 
-/* Glassmorphism & Monochrome Elements */
+/* Glassmorphism & Blue & White Elements */
 .glass-panel {
-  background: rgba(18, 18, 22, 0.85);
+  background: rgba(8, 24, 56, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(96, 165, 250, 0.2);
 }
 
 .glass-panel:hover {
-  border-color: rgba(255, 255, 255, 0.25);
+  border-color: rgba(96, 165, 250, 0.45);
+}
+
+.glow-blue {
+  box-shadow: 0 0 25px -5px rgba(59, 130, 246, 0.35);
 }
 
 .glow-white {
-  box-shadow: 0 0 25px -5px rgba(255, 255, 255, 0.25);
-}
-
-.glow-silver {
-  box-shadow: 0 0 25px -5px rgba(161, 161, 170, 0.2);
+  box-shadow: 0 0 25px -5px rgba(255, 255, 255, 0.35);
 }
 
 .glow-subtle {
-  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 4px 20px -2px rgba(3, 9, 25, 0.85);
 }
 
-/* Custom Monochrome Scrollbar */
+/* Custom Blue & White Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #09090b;
+  background: #030919;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #27272a;
+  background: #1e3a8a;
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #71717a;
+  background: #3b82f6;
 }
 
 @keyframes radar-sweep {
@@ -69,5 +69,3 @@
 .animate-radar {
   animation: radar-sweep 4s linear infinite;
 }
-
-
