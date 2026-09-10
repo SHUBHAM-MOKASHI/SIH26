@@ -8,12 +8,17 @@ export default {
   theme: {
     extend: {
       colors: {
-        dark: {
-          bg: '#0B0F17',
-          surface: '#111827',
-          elevated: '#1F2937',
-          border: '#1E293B',
-          hover: '#334155',
+        brand: {
+          bg: '#F7FAFC',
+          primary: '#1769AA',
+          primaryHover: '#13558A',
+          accent: '#19B5E6',
+          navy: '#12355B',
+          muted: '#4A607A',
+          surface: '#FFFFFF',
+          border: '#E2E8F0',
+          tint: '#F0F7FD',
+          tintBorder: '#D4E8F8',
         }
       },
       fontFamily: {
