@@ -4,7 +4,7 @@ from typing import Dict, Any, Tuple, List
 import random
 
 class ThreatAnalyzerService:
-    # --- NLP & Sentiment Analysis Keywords (Pure English) ---
+    # --- NLP & Sentiment Analysis Keywords (Pure Clear English) ---
     NEGATIVE_KEYWORDS = [
         "scam", "fraud", "hacked", "fake", "protest", "theft", "cheat", "alert", "danger",
         "riot", "boycott", "leak", "arrest", "conspiracy", "threat", "urgent", "warning",
@@ -16,7 +16,7 @@ class ThreatAnalyzerService:
     POSITIVE_KEYWORDS = [
         "success", "growth", "launch", "proud", "innovative", "safe", "verified", "achievement",
         "congratulations", "win", "improved", "secure", "relief", "development", "good", "great",
-        "progress", "excellent", "safe", "milestone", "official", "resolved", "helpful"
+        "progress", "excellent", "milestone", "official", "resolved", "helpful"
     ]
     
     HIGH_RISK_TRIGGERS = [
@@ -105,7 +105,7 @@ class ThreatAnalyzerService:
         username_clean = username.strip()
         
         if followers is None:
-            followers = random.randint(5, 150) if "bot" in username_clean.lower() or "alert" in username_clean.lower() else random.randint(800, 12000)
+            followers = random.randint(5, 120) if "bot" in username_clean.lower() or "alert" in username_clean.lower() else random.randint(800, 12000)
         if following is None:
             following = random.randint(2500, 5500) if "bot" in username_clean.lower() or "alert" in username_clean.lower() else random.randint(150, 700)
         if posts_per_hr is None:
@@ -116,16 +116,16 @@ class ThreatAnalyzerService:
         bot_score = 0.0
         patterns: List[str] = []
 
-        # Heuristic 1: Follower to Following ratio asymmetry
+        # Heuristic 1: Follower to Following ratio
         ratio = followers / max(following, 1)
         if ratio < 0.05 and following > 1000:
             bot_score += 35.0
-            patterns.append("Follows too many users with zero followers")
+            patterns.append("Follows thousands of accounts with almost zero followers")
 
         # Heuristic 2: Post Frequency
         if posts_per_hr > 30.0:
             bot_score += 30.0
-            patterns.append(f"Unusually fast posting rate ({posts_per_hr} posts per hour)")
+            patterns.append(f"Unusually high posting rate ({posts_per_hr} posts per hour)")
         elif posts_per_hr > 15.0:
             bot_score += 15.0
             patterns.append("High posting frequency")
@@ -142,10 +142,10 @@ class ThreatAnalyzerService:
         digits_count = sum(c.isdigit() for c in username_clean)
         if digits_count >= 4:
             bot_score += 15.0
-            patterns.append("Random computer-generated numbers in username")
+            patterns.append("Computer-generated number pattern in username")
         if any(kw in username_clean.lower() for kw in ["bot", "cyber", "alert", "raid", "army", "anon", "trend"]):
             bot_score += 10.0
-            patterns.append("Suspicious campaign keyword in handle")
+            patterns.append("Spam campaign keyword in handle")
 
         bot_probability = min(round(bot_score, 1), 99.4)
         is_flagged = bot_probability >= 60.0
@@ -153,13 +153,12 @@ class ThreatAnalyzerService:
         if not patterns:
             patterns.append("Normal real user behavior")
 
-        # Cluster assignment
         network_cluster = None
         if is_flagged:
             if "alert" in username_clean.lower() or "news" in username_clean.lower():
                 network_cluster = "Fake News Bot Cluster #1"
             elif "scam" in username_clean.lower() or "free" in username_clean.lower() or "claim" in username_clean.lower():
-                network_cluster = "Phishing & Fraud Bot Cluster #2"
+                network_cluster = "Phishing Scam Bot Cluster #2"
             else:
                 network_cluster = "Automated Spam Bot Cluster #3"
 
@@ -194,7 +193,7 @@ class ThreatAnalyzerService:
 
         if re.match(r"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$", domain):
             score += 45.0
-            risk_factors.append("Direct IP address used instead of real domain name")
+            risk_factors.append("Direct IP address used instead of legitimate domain name")
 
         for tld in suspicious_tlds:
             if domain_lower.endswith(tld):
@@ -205,7 +204,7 @@ class ThreatAnalyzerService:
         matched_kws = [kw for kw in phish_keywords if kw in full_url_lower]
         if matched_kws:
             score += min(len(matched_kws) * 20.0, 40.0)
-            risk_factors.append(f"Fake bank/credential keywords found: {', '.join(matched_kws)}")
+            risk_factors.append(f"Fake banking & credential keywords found: {', '.join(matched_kws)}")
 
         if domain_lower.count("-") >= 2:
             score += 20.0
@@ -213,11 +212,11 @@ class ThreatAnalyzerService:
 
         if any(full_url_lower.endswith(ext) for ext in malware_extensions):
             score += 50.0
-            risk_factors.append("Direct malware / suspicious app (.APK/.EXE) download file")
+            risk_factors.append("Direct download file for suspicious app (.APK/.EXE)")
 
         confidence_score = min(round(score, 1), 99.8)
 
-        if any("malware" in rf or ".apk" in full_url_lower for rf in risk_factors):
+        if any("download" in rf or ".apk" in full_url_lower for rf in risk_factors):
             threat_type = "Malware"
         elif confidence_score >= 60.0:
             threat_type = "Phishing"
